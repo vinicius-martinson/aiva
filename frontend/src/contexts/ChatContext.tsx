@@ -46,11 +46,17 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
       const messages = state.messages.map((msg) => {
         if (msg.id === action.payload.messageId) {
           // Create new message object with locked data
-          if (msg.type === "widget:schedule_type" || msg.type === "widget:booking_summary") {
+          if (msg.type === "widget:schedule_type") {
             return {
               ...msg,
               data: { ...msg.data, locked: true }
-            }
+            } as typeof msg
+          }
+          if (msg.type === "widget:booking_summary") {
+            return {
+              ...msg,
+              data: { ...msg.data, locked: true }
+            } as typeof msg
           }
         }
         return msg

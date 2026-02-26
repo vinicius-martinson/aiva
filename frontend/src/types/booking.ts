@@ -1,15 +1,27 @@
-// FlowState enum - defines all booking states
-export enum FlowState {
-  IDLE = "IDLE",
-  CLASSIFYING = "CLASSIFYING",
-  AWAITING_SCHEDULE_TYPE = "AWAITING_SCHEDULE_TYPE",
-  AWAITING_ADDRESS = "AWAITING_ADDRESS",
-  VALIDATING_SERVICE = "VALIDATING_SERVICE",
-  AWAITING_SLOT_SELECTION = "AWAITING_SLOT_SELECTION",
-  CONFIRMING = "CONFIRMING",
-  BOOKED = "BOOKED",
-  ERROR = "ERROR"
-}
+// FlowState type - defines all booking states
+export type FlowState =
+  | "IDLE"
+  | "CLASSIFYING"
+  | "AWAITING_SCHEDULE_TYPE"
+  | "AWAITING_ADDRESS"
+  | "VALIDATING_SERVICE"
+  | "AWAITING_SLOT_SELECTION"
+  | "CONFIRMING"
+  | "BOOKED"
+  | "ERROR"
+
+// FlowState constants for easy reference
+export const FlowState = {
+  IDLE: "IDLE",
+  CLASSIFYING: "CLASSIFYING",
+  AWAITING_SCHEDULE_TYPE: "AWAITING_SCHEDULE_TYPE",
+  AWAITING_ADDRESS: "AWAITING_ADDRESS",
+  VALIDATING_SERVICE: "VALIDATING_SERVICE",
+  AWAITING_SLOT_SELECTION: "AWAITING_SLOT_SELECTION",
+  CONFIRMING: "CONFIRMING",
+  BOOKED: "BOOKED",
+  ERROR: "ERROR"
+} as const
 
 // BookingData interface - tracks booking state
 export interface BookingData {
