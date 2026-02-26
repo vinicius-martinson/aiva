@@ -57,4 +57,10 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Allow ActionCable connections from the Vite dev server
+  config.action_cable.allowed_request_origins = [/http:\/\/localhost.*/]
+
+  # Reduce ActionCable log noise so [AUDIO] lines stand out
+  config.action_cable.logger = ActiveSupport::Logger.new(nil)
 end
