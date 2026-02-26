@@ -91,12 +91,13 @@ Emitted when the Whisper service returns a speech-to-text result.
 
 ### 2. `agent_text_delta`
 
-Emitted as Claude streams its response token-by-token.
+Emitted as Claude streams its response token-by-token. Includes a `seq` field for ordering — the async ActionCable adapter does not guarantee delivery order, so consumers must reassemble chunks by sequence number.
 
 ```json
 {
   "type": "agent_text_delta",
   "text": "partial text",
+  "seq": 1,
   "timestamp": "2026-02-26T12:00:00Z"
 }
 ```
@@ -104,7 +105,15 @@ Emitted as Claude streams its response token-by-token.
 | Field | Type | Description |
 |-------|------|-------------|
 | `text` | `string` | Incremental text delta — append to your running buffer |
+| `seq` | `integer` | 1-based sequence number, resets to 1 each streaming turn. Use to reassemble chunks in order. |
 | `timestamp` | `string` | ISO 8601 timestamp |
+
+**Recommended client-side reassembly:**
+
+1. Maintain a `nextSeq` counter (starts at 1) and a `pending` map.
+2. On each `agent_text_delta`, store `pending[seq] = text`.
+3. Drain all consecutive chunks starting from `nextSeq` (append to buffer, increment `nextSeq`).
+4. On `agent_turn_complete`, reset `nextSeq = 1` and clear `pending`.
 
 ### 3. `agent_turn_complete`
 

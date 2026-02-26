@@ -163,7 +163,9 @@ function App() {
 
       {(agentMessages.length > 0 || streamingText) && (
         <div className="agent-panel">
-          <h2>Agent Script</h2>
+          <div className="agent-header">
+            <h2>Agent Script</h2>
+          </div>
           <div className="agent-messages">
             {agentMessages.map((msg, i) => (
               <div key={i} className="agent-message">

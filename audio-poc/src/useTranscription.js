@@ -23,6 +23,21 @@ export function useTranscription() {
   const streamRef = useRef(null);
   const streamingTextRef = useRef("");
 
+  // Chunk reordering state
+  const nextSeqRef = useRef(1);
+  const pendingChunksRef = useRef({});
+
+  const drainChunks = useCallback(() => {
+    while (pendingChunksRef.current[nextSeqRef.current] !== undefined) {
+      const chunk = pendingChunksRef.current[nextSeqRef.current];
+      delete pendingChunksRef.current[nextSeqRef.current];
+      nextSeqRef.current += 1;
+
+      streamingTextRef.current += chunk;
+      setStreamingText(streamingTextRef.current);
+    }
+  }, []);
+
   const startRecording = useCallback(async () => {
     try {
       setError(null);
@@ -32,6 +47,8 @@ export function useTranscription() {
       setStreamingText("");
       setToolEvents([]);
       streamingTextRef.current = "";
+      nextSeqRef.current = 1;
+      pendingChunksRef.current = {};
 
       // Clean up any existing subscription to prevent duplicates
       if (subscriptionRef.current) {
@@ -46,8 +63,8 @@ export function useTranscription() {
       const subscription = getCable().subscriptions.create("TranscriptionChannel", {
         received(data) {
           if (data.type === "agent_text_delta") {
-            streamingTextRef.current += data.text;
-            setStreamingText(streamingTextRef.current);
+            pendingChunksRef.current[data.seq] = data.text;
+            drainChunks();
           } else if (data.type === "agent_turn_complete") {
             // Finalize streamed text into agentMessages
             if (streamingTextRef.current) {
@@ -59,6 +76,8 @@ export function useTranscription() {
             }
             streamingTextRef.current = "";
             setStreamingText("");
+            nextSeqRef.current = 1;
+            pendingChunksRef.current = {};
 
             // Store tool calls for widget rendering
             if (data.tool_calls && data.tool_calls.length > 0) {
@@ -107,7 +126,7 @@ export function useTranscription() {
       setError(err.message);
       console.error("Failed to start recording:", err);
     }
-  }, []);
+  }, [drainChunks]);
 
   // Cleanup on unmount to prevent orphaned subscriptions (React StrictMode)
   useEffect(() => {
