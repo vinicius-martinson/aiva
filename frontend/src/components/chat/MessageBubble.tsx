@@ -1,4 +1,4 @@
-import type { TextMessage } from "@/types/chat"
+import type { ChatMessage, TextMessage } from "@/types/chat"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Sparkles } from "lucide-react"
 
@@ -41,10 +41,48 @@ function VABubble({ message }: { message: TextMessage }) {
   )
 }
 
-export function MessageBubble({ message }: { message: TextMessage }) {
-  // Phase 1 only handles text type — Phase 2 will add widget rendering
-  if (message.role === "assistant") {
-    return <AIBubble message={message} />
+function AIWidgetBubble({ message, children }: { message: ChatMessage; children: React.ReactNode }) {
+  return (
+    <div className="flex gap-3 items-start max-w-[85%]">
+      <Avatar className="h-8 w-8 shrink-0">
+        <AvatarFallback className="bg-blue-500 text-white">
+          <Sparkles className="h-4 w-4" />
+        </AvatarFallback>
+      </Avatar>
+      <div className="flex flex-col gap-1">
+        <p className="text-sm font-semibold">AI Assistant</p>
+        <div className="bg-white border rounded-2xl rounded-tl-none shadow-sm px-4 py-3">
+          <p className="text-sm leading-relaxed">{message.content}</p>
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export function MessageBubble({ message }: { message: ChatMessage }) {
+  if (message.role === "user") {
+    return <VABubble message={message as TextMessage} />
   }
-  return <VABubble message={message} />
+
+  switch (message.type) {
+    case "text":
+      return <AIBubble message={message} />
+    case "widget:schedule_type":
+      return (
+        <AIWidgetBubble message={message}>
+          {/* Widget component will be imported in Plan 04 integration or rendered here */}
+          <div data-widget="schedule_type" />
+        </AIWidgetBubble>
+      )
+    case "widget:booking_summary":
+      return (
+        <AIWidgetBubble message={message}>
+          {/* Widget component will be imported in Plan 04 integration or rendered here */}
+          <div data-widget="booking_summary" />
+        </AIWidgetBubble>
+      )
+    default:
+      return <AIBubble message={message as TextMessage} />
+  }
 }

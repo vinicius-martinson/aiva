@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react"
 import { useChat } from "@/contexts/ChatContext"
 import { MessageBubble } from "./MessageBubble"
-import type { TextMessage } from "@/types/chat"
+import { TypingIndicator } from "./TypingIndicator"
+import { QuickActions } from "./QuickActions"
 
 export function MessageList() {
   const { state } = useChat()
@@ -15,13 +16,18 @@ export function MessageList() {
   return (
     <div className="flex-1 overflow-y-auto p-6">
       <div className="flex flex-col gap-4">
-        {state.messages.map((msg) => {
-          // Phase 1: only render text messages
-          if (msg.type === "text") {
-            return <MessageBubble key={msg.id} message={msg as TextMessage} />
-          }
-          return null
-        })}
+        {state.messages.map((msg, index) => (
+          <div key={msg.id}>
+            <MessageBubble message={msg} />
+            {/* Quick actions below first AI message only */}
+            {msg.role === "assistant" &&
+             index === state.messages.findIndex(m => m.role === "assistant") &&
+             !state.quickActionsUsed && (
+              <QuickActions />
+            )}
+          </div>
+        ))}
+        {state.isTyping && <TypingIndicator />}
         <div ref={messagesEndRef} />
       </div>
     </div>
