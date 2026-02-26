@@ -1,0 +1,161 @@
+# Requirements: Aiva — CSR AI Scheduling Assistant
+
+**Defined:** 2026-02-26
+**Core Value:** VA can complete a full job booking through a single chat conversation, faster and with fewer errors than manual form entry.
+
+## v1 Requirements
+
+Requirements for initial release. Each maps to roadmap phases.
+
+### Chat Core
+
+- [ ] **CHAT-01**: VA can send text messages via input bar (Enter to send, Shift+Enter for newline)
+- [ ] **CHAT-02**: AI messages render left-aligned with AI avatar and sender label
+- [ ] **CHAT-03**: VA messages render right-aligned with blue bubble and timestamp
+- [ ] **CHAT-04**: Typing indicator shows animated dots while AI is processing a response
+- [ ] **CHAT-05**: Quick action buttons render below first AI greeting (Schedule a Job, Create Estimate, View Calendar)
+- [ ] **CHAT-06**: Quick action buttons disappear after one is clicked
+- [ ] **CHAT-07**: Chat auto-scrolls to newest message when new messages are added
+- [ ] **CHAT-08**: AI disclaimer text renders below input bar ("AI can make mistakes...")
+
+### Booking Flow
+
+- [ ] **BOOK-01**: State machine controls conversation flow through states: IDLE → CLASSIFYING → AWAITING_SCHEDULE_TYPE → AWAITING_ADDRESS → VALIDATING_SERVICE → AWAITING_SLOT_SELECTION → CONFIRMING → BOOKED
+- [ ] **BOOK-02**: Schedule Type widget renders as selectable cards (Job / Estimate / Notes Only) inside AI message
+- [ ] **BOOK-03**: Selected schedule type card highlights with blue border, Confirm button enables
+- [ ] **BOOK-04**: Booking Summary widget renders with client details grid, time slot cards, Draft badge, and Edit/Confirm buttons
+- [ ] **BOOK-05**: Time slot cards are selectable with first slot pre-selected by default
+- [ ] **BOOK-06**: Confirm & Create Job button triggers mock job creation and shows success message with job ID
+- [ ] **BOOK-07**: Mock AI engine extracts service type and address from VA text input and responds appropriately
+- [ ] **BOOK-08**: Error state renders when address is not serviceable (mock toggle)
+- [ ] **BOOK-09**: Error state renders for unknown client when no URL params present
+- [ ] **BOOK-10**: Widgets lock to read-only after VA submits their selection
+- [ ] **BOOK-11**: Message format supports both text content and structured widget data (compatible with future Anthropic SDK responses)
+
+### Layout & Navigation
+
+- [ ] **LAYOUT-01**: Three-column desktop layout renders with left sidebar (~260px), center chat (flex-1), right context panel (~300px)
+- [ ] **LAYOUT-02**: Left sidebar shows Aiva logo/branding, grouped nav items with icons, and user footer
+- [ ] **LAYOUT-03**: AI Assistant nav item shows active state (dark background, white text) on intake page
+- [ ] **LAYOUT-04**: New Chat button in header resets conversation state to IDLE and clears messages
+- [ ] **LAYOUT-05**: Chat header shows AI icon + "AI Scheduling Assistant" title + New Chat button + VA avatar
+
+### Call Context
+
+- [ ] **CTX-01**: Right panel shows "Call Context" header with green Live badge (animated pulse)
+- [ ] **CTX-02**: Client card displays initials avatar, name (bold), and phone number
+- [ ] **CTX-03**: Call details section shows Queue, Duration (live timer), and Call Type as label-value pairs
+- [ ] **CTX-04**: Previous Jobs section lists job cards with name, date, and status badge (Completed = green)
+- [ ] **CTX-05**: URL parameter `customer_uuid` pre-populates client data in context panel and chat
+- [ ] **CTX-06**: URL parameter `phone_number` used as fallback lookup when customer_uuid absent
+- [ ] **CTX-07**: URL parameter `csr_ai_phone_session_uuid` stored in chat context for future backend use
+- [ ] **CTX-08**: Unknown caller state renders when no client found from URL params
+
+### Audio Simulation
+
+- [ ] **AUDIO-01**: Mic button in input bar toggles listening state on click
+- [ ] **AUDIO-02**: Active listening shows filled red mic icon with pulse animation
+- [ ] **AUDIO-03**: Mock transcript chunks inject into chat as system messages on a timer (8-12 second intervals)
+- [ ] **AUDIO-04**: After 2 transcript injections, mock AI triggers CLASSIFYING state transition
+
+### Mock Engine
+
+- [ ] **MOCK-01**: All data fetching goes through lib/api.ts abstraction layer (single swap-out point for real backend)
+- [ ] **MOCK-02**: Mock AI responses are deterministic, keyed to current FlowState
+- [ ] **MOCK-03**: Simulated delay (600-1000ms) before AI responses for realistic feel
+- [ ] **MOCK-04**: Mock client data includes Sarah Johnson profile with previous jobs
+- [ ] **MOCK-05**: Mock time slots include 3 available slots with dates and times
+
+## v2 Requirements
+
+Deferred to future release. Tracked but not in current roadmap.
+
+### Backend Integration
+
+- **BACK-01**: Real Anthropic SDK integration for AI conversation responses
+- **BACK-02**: Widget rendering driven by structured data from backend transcription
+- **BACK-03**: Real client data from Rails API via lib/api.ts swap
+- **BACK-04**: Real time slot availability from scheduling backend
+
+### Enhanced Features
+
+- **ENH-01**: Real speech-to-text via Deepgram or similar API
+- **ENH-02**: Session persistence across page refresh via local storage
+- **ENH-03**: Full client history sidebar (all past jobs, not just last 2)
+- **ENH-04**: Contextual quick replies suggested by AI based on state
+- **ENH-05**: Error recovery suggestions ("Did you mean...?")
+- **ENH-06**: Auto-scroll with user scroll detection (show "New messages" button)
+
+## Out of Scope
+
+Explicitly excluded. Documented to prevent scope creep.
+
+| Feature | Reason |
+|---------|--------|
+| Mobile/responsive layout | Desktop-only tool, min 1280px, VAs use desktop |
+| Real authentication/OAuth | Internal tool, no auth needed for MVP |
+| Notes Only flow | Deferred per scope decision — happy path + errors only |
+| Real-time WebSocket connections | No backend in MVP |
+| Database persistence | All data mocked locally |
+| Multi-language support | English-only for MVP validation |
+| Free-form conversational AI | Deterministic state machine preferred for reliability |
+| Rich text/markdown in messages | Plain text with semantic structure sufficient |
+| Chat history search | Not needed for single-session tool |
+| Message deletion | New Chat reset is sufficient |
+
+## Traceability
+
+Which phases cover which requirements. Updated during roadmap creation.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| CHAT-01 | — | Pending |
+| CHAT-02 | — | Pending |
+| CHAT-03 | — | Pending |
+| CHAT-04 | — | Pending |
+| CHAT-05 | — | Pending |
+| CHAT-06 | — | Pending |
+| CHAT-07 | — | Pending |
+| CHAT-08 | — | Pending |
+| BOOK-01 | — | Pending |
+| BOOK-02 | — | Pending |
+| BOOK-03 | — | Pending |
+| BOOK-04 | — | Pending |
+| BOOK-05 | — | Pending |
+| BOOK-06 | — | Pending |
+| BOOK-07 | — | Pending |
+| BOOK-08 | — | Pending |
+| BOOK-09 | — | Pending |
+| BOOK-10 | — | Pending |
+| BOOK-11 | — | Pending |
+| LAYOUT-01 | — | Pending |
+| LAYOUT-02 | — | Pending |
+| LAYOUT-03 | — | Pending |
+| LAYOUT-04 | — | Pending |
+| LAYOUT-05 | — | Pending |
+| CTX-01 | — | Pending |
+| CTX-02 | — | Pending |
+| CTX-03 | — | Pending |
+| CTX-04 | — | Pending |
+| CTX-05 | — | Pending |
+| CTX-06 | — | Pending |
+| CTX-07 | — | Pending |
+| CTX-08 | — | Pending |
+| AUDIO-01 | — | Pending |
+| AUDIO-02 | — | Pending |
+| AUDIO-03 | — | Pending |
+| AUDIO-04 | — | Pending |
+| MOCK-01 | — | Pending |
+| MOCK-02 | — | Pending |
+| MOCK-03 | — | Pending |
+| MOCK-04 | — | Pending |
+| MOCK-05 | — | Pending |
+
+**Coverage:**
+- v1 requirements: 41 total
+- Mapped to phases: 0
+- Unmapped: 41
+
+---
+*Requirements defined: 2026-02-26*
+*Last updated: 2026-02-26 after initial definition*
