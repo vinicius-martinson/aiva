@@ -36,6 +36,7 @@ class AgentService
     @client = Anthropic::Client.new(api_key: ENV.fetch("ANTHROPIC_API_KEY"))
     @stream_name = stream_name
     @messages = []
+    @seq = 0
   end
 
   def chat(text)
@@ -51,6 +52,7 @@ class AgentService
         break
       end
 
+      @seq = 0
       stream = call_claude_stream
       assistant_content = []
       tool_uses = []
@@ -168,7 +170,8 @@ class AgentService
   def broadcast_agent_text_delta(text)
     return if text.nil? || text.empty?
 
-    broadcast({ type: "agent_text_delta", text: text, timestamp: Time.current.iso8601 })
+    @seq += 1
+    broadcast({ type: "agent_text_delta", text: text, seq: @seq, timestamp: Time.current.iso8601 })
   end
 
   def broadcast_turn_complete(agent_script, tool_calls)
