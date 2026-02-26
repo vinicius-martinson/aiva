@@ -51,32 +51,57 @@ class AgentService
         break
       end
 
-      response = call_claude
+      stream = call_claude_stream
+      assistant_content = []
+      tool_uses = []
+      turn_text = ""
 
-      # Process response content blocks
-      assistant_content = response.content.map { |block| serialize_content_block(block) }
-      @messages << { role: "assistant", content: assistant_content }
-
-      # Collect tool uses first
-      tool_uses = response.content.select { |b| b.type.to_s == "tool_use" }
-
-      # Only broadcast text if there are no tool calls in this response
-      response.content.each do |block|
-        case block.type.to_s
-        when "text"
-          broadcast_agent_text(block.text) if tool_uses.empty?
+      stream.each do |event|
+        case event
+        when Anthropic::Streaming::TextEvent
+          turn_text += event.text
+          broadcast_agent_text_delta(event.text)
+        when Anthropic::Streaming::ContentBlockStopEvent
+          block = event.content_block
+          assistant_content << serialize_content_block(block)
+          tool_uses << block if block.type.to_s == "tool_use"
         end
       end
 
-      # If no tool calls, we're done
+      final_message = stream.accumulated_message
+
+      # Log complete text for debugging
+      assistant_content.each do |block|
+        puts "[AGENT] #{block[:text]}" if block[:type] == "text"
+      end
+
+      # Add complete assistant message to history
+      @messages << { role: "assistant", content: assistant_content }
+
+      # Execute tools and collect results
+      tool_call_results = tool_uses.map do |tool_use|
+        tool_result = execute_tool(tool_use)
+        {
+          tool_name: tool_use.name,
+          tool_use_id: tool_use.id,
+          input: parse_tool_input(tool_use.input),
+          result: tool_result[:parsed_result]
+        }
+      end
+
+      # Add tool results to message history (if any)
+      if tool_call_results.any?
+        tool_messages = tool_call_results.map do |tc|
+          { type: "tool_result", tool_use_id: tc[:tool_use_id], content: tc[:result].to_json }
+        end
+        @messages << { role: "user", content: tool_messages }
+      end
+
+      # Single broadcast with agent script + tool data
+      broadcast_turn_complete(turn_text, tool_call_results)
+
       break if tool_uses.empty?
-
-      # Execute all tool calls and collect results
-      tool_results = tool_uses.map { |tool_use| execute_tool(tool_use) }
-      @messages << { role: "user", content: tool_results }
-
-      # If stop_reason is end_turn (no more tool calls expected), break
-      break if response.stop_reason == "end_turn"
+      break if final_message.stop_reason == "end_turn"
     end
   rescue => e
     puts "[AGENT] Error: #{e.message}"
@@ -86,8 +111,8 @@ class AgentService
 
   private
 
-  def call_claude
-    @client.messages.create(
+  def call_claude_stream
+    @client.messages.stream(
       model: "claude-sonnet-4-20250514",
       max_tokens: 1024,
       system: SYSTEM_PROMPT,
@@ -98,28 +123,30 @@ class AgentService
 
   def execute_tool(tool_use)
     tool_name = tool_use.name
-    raw_input = tool_use.input.is_a?(Hash) ? tool_use.input : tool_use.input.to_h
-    tool_input = raw_input.transform_keys(&:to_s)
+    tool_input = parse_tool_input(tool_use.input)
     tool_use_id = tool_use.id
 
     puts "[TOOL] Calling: #{tool_name}"
     puts "[TOOL] Input: #{tool_input.inspect}"
 
-    broadcast_tool_call(tool_name, tool_use_id, tool_input)
-
     tool_module = TOOL_MODULES[tool_name]
     unless tool_module
-      error_result = { error: "Unknown tool: #{tool_name}" }
-      broadcast_tool_result(tool_name, tool_use_id, error_result)
-      return { type: "tool_result", tool_use_id: tool_use_id, content: error_result.to_json }
+      return { tool_use_id: tool_use_id, parsed_result: { error: "Unknown tool: #{tool_name}" } }
     end
 
     result = tool_module.call(tool_input)
     puts "[TOOL] Result: #{result.inspect}"
 
-    broadcast_tool_result(tool_name, tool_use_id, result)
+    { tool_use_id: tool_use_id, parsed_result: result }
+  end
 
-    { type: "tool_result", tool_use_id: tool_use_id, content: result.to_json }
+  def parse_tool_input(input)
+    raw = case input
+          when Hash then input
+          when String then JSON.parse(input)
+          else input.to_h
+          end
+    raw.transform_keys(&:to_s)
   end
 
   def serialize_content_block(block)
@@ -127,36 +154,35 @@ class AgentService
     when "text"
       { type: "text", text: block.text }
     when "tool_use"
-      input = block.input.is_a?(Hash) ? block.input : block.input.to_h
+      input = case block.input
+              when Hash then block.input
+              when String then JSON.parse(block.input)
+              else block.input.to_h
+              end
       { type: "tool_use", id: block.id, name: block.name, input: input }
     else
       { type: block.type.to_s }
     end
   end
 
-  def broadcast_agent_text(text)
-    return if text.nil? || text.strip.empty?
+  def broadcast_agent_text_delta(text)
+    return if text.nil? || text.empty?
 
-    puts "[AGENT] #{text}"
-    broadcast({ type: "agent_text", text: text, timestamp: Time.current.iso8601 })
+    broadcast({ type: "agent_text_delta", text: text, timestamp: Time.current.iso8601 })
   end
 
-  def broadcast_tool_call(tool_name, tool_use_id, input)
+  def broadcast_turn_complete(agent_script, tool_calls)
     broadcast({
-      type: "tool_call",
-      tool_name: tool_name,
-      tool_use_id: tool_use_id,
-      input: input,
-      timestamp: Time.current.iso8601
-    })
-  end
-
-  def broadcast_tool_result(tool_name, tool_use_id, result)
-    broadcast({
-      type: "tool_result",
-      tool_name: tool_name,
-      tool_use_id: tool_use_id,
-      result: result,
+      type: "agent_turn_complete",
+      agent_script: agent_script.presence,
+      tool_calls: tool_calls.map do |tc|
+        {
+          tool_name: tc[:tool_name],
+          tool_use_id: tc[:tool_use_id],
+          input: tc[:input],
+          result: tc[:result]
+        }
+      end,
       timestamp: Time.current.iso8601
     })
   end

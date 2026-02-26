@@ -1,18 +1,27 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { createConsumer } from "@rails/actioncable";
 
-const cable = createConsumer("ws://localhost:3000/cable");
+let cable = null;
+function getCable() {
+  if (!cable) {
+    cable = createConsumer("ws://localhost:3000/cable");
+  }
+  return cable;
+}
 
 export function useTranscription() {
   const [isRecording, setIsRecording] = useState(false);
   const [transcripts, setTranscripts] = useState([]);
   const [interimTranscript, setInterimTranscript] = useState("");
   const [agentMessages, setAgentMessages] = useState([]);
+  const [streamingText, setStreamingText] = useState("");
+  const [toolEvents, setToolEvents] = useState([]);
   const [error, setError] = useState(null);
 
   const mediaRecorderRef = useRef(null);
   const subscriptionRef = useRef(null);
   const streamRef = useRef(null);
+  const streamingTextRef = useRef("");
 
   const startRecording = useCallback(async () => {
     try {
@@ -20,18 +29,50 @@ export function useTranscription() {
       setTranscripts([]);
       setInterimTranscript("");
       setAgentMessages([]);
+      setStreamingText("");
+      setToolEvents([]);
+      streamingTextRef.current = "";
+
+      // Clean up any existing subscription to prevent duplicates
+      if (subscriptionRef.current) {
+        subscriptionRef.current.unsubscribe();
+        subscriptionRef.current = null;
+      }
 
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       streamRef.current = stream;
 
       // Subscribe to ActionCable channel
-      const subscription = cable.subscriptions.create("TranscriptionChannel", {
+      const subscription = getCable().subscriptions.create("TranscriptionChannel", {
         received(data) {
-          if (data.type === "agent_text") {
-            setAgentMessages((prev) => [
-              ...prev,
-              { text: data.text, timestamp: Date.now() },
-            ]);
+          if (data.type === "agent_text_delta") {
+            streamingTextRef.current += data.text;
+            setStreamingText(streamingTextRef.current);
+          } else if (data.type === "agent_turn_complete") {
+            // Finalize streamed text into agentMessages
+            if (streamingTextRef.current) {
+              const finalText = streamingTextRef.current;
+              setAgentMessages((prev) => [
+                ...prev,
+                { text: finalText, timestamp: Date.now() },
+              ]);
+            }
+            streamingTextRef.current = "";
+            setStreamingText("");
+
+            // Store tool calls for widget rendering
+            if (data.tool_calls && data.tool_calls.length > 0) {
+              setToolEvents((prev) => [
+                ...prev,
+                ...data.tool_calls.map((tc) => ({
+                  toolName: tc.tool_name,
+                  toolUseId: tc.tool_use_id,
+                  input: tc.input,
+                  result: tc.result,
+                  timestamp: Date.now(),
+                })),
+              ]);
+            }
           } else if (data.is_final) {
             setTranscripts((prev) => [...prev, data.transcript]);
             setInterimTranscript("");
@@ -68,6 +109,16 @@ export function useTranscription() {
     }
   }, []);
 
+  // Cleanup on unmount to prevent orphaned subscriptions (React StrictMode)
+  useEffect(() => {
+    return () => {
+      if (subscriptionRef.current) {
+        subscriptionRef.current.unsubscribe();
+        subscriptionRef.current = null;
+      }
+    };
+  }, []);
+
   const stopRecording = useCallback(() => {
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
       mediaRecorderRef.current.stop();
@@ -92,6 +143,8 @@ export function useTranscription() {
     transcripts,
     interimTranscript,
     agentMessages,
+    streamingText,
+    toolEvents,
     error,
     startRecording,
     stopRecording,

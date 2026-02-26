@@ -117,3 +117,130 @@ h1 {
   line-height: 1.5;
   font-size: 1rem;
 }
+
+.agent-message.streaming {
+  opacity: 0.85;
+  border-left: 2px solid #007bff;
+}
+
+/* Tool widgets panel */
+.tools-panel {
+  margin-top: 2rem;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: #eef2ff;
+  min-height: 120px;
+}
+
+.tools-panel h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #3730a3;
+}
+
+.tool-widgets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tool-widget {
+  background: white;
+  border: 1px solid #e0e7ff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tool-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #e0e7ff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #3730a3;
+}
+
+.tool-icon {
+  font-size: 1rem;
+}
+
+.tool-widget-body {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: #1e1b4b;
+}
+
+.tool-field {
+  line-height: 1.4;
+}
+
+.badge-success {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  background: #d1fae5;
+  color: #065f46;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge-error {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tool-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.tool-link:hover {
+  text-decoration: underline;
+}
+
+.tool-slots {
+  margin: 0.25rem 0 0 1.25rem;
+  padding: 0;
+  font-size: 0.85rem;
+}
+
+.tool-slots li {
+  margin-bottom: 0.15rem;
+}
+
+.confirmation-msg {
+  margin-top: 0.25rem;
+  padding: 0.4rem 0.6rem;
+  background: #d1fae5;
+  border-radius: 4px;
+  color: #065f46;
+  font-weight: 500;
+}
+
+.upsell-description {
+  color: #4b5563;
+  font-style: italic;
+}
+
+.tool-json {
+  margin: 0;
+  font-size: 0.8rem;
+  background: #f5f5f5;
+  padding: 0.5rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
