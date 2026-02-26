@@ -82,8 +82,13 @@ export function ChatInput() {
     // Hide typing indicator
     dispatch({ type: "SET_TYPING", payload: false })
 
-    // Get AI response from mock engine
-    const response = getAIResponse(state.flowState, trimmed, state.bookingData)
+    // Get AI response from mock engine (pass clientName for context-aware responses)
+    const response = getAIResponse(
+      state.flowState,
+      trimmed,
+      state.bookingData,
+      state.clientName ?? undefined
+    )
 
     // Add AI response message
     dispatch({

@@ -10,7 +10,8 @@ import { mockClient, mockTimeSlots, scheduleTypeOptions } from "./mockData"
 export function getAIResponse(
   flowState: FlowState,
   userInput: string,
-  bookingData: BookingData
+  bookingData: BookingData,
+  clientName?: string
 ): { message: ChatMessage; nextState: FlowState; data?: Partial<BookingData> } {
   const input = userInput.toLowerCase().trim()
 
@@ -34,13 +35,31 @@ export function getAIResponse(
         }
       }
 
+      // Context-aware re-prompt when client is known but no booking intent detected
+      if (clientName && input.length > 0) {
+        return {
+          message: {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            type: "text",
+            content: "I didn't catch the service details. Could you tell me what type of service and the address?",
+            timestamp: new Date()
+          },
+          nextState: FlowState.IDLE
+        }
+      }
+
       // Stay in IDLE for initial greeting
+      const greetingContent = clientName
+        ? `Hi! I see you're on a call with ${clientName}. How can I help with their appointment?`
+        : "Hi, I'm Aiva. How can I help you today?"
+
       return {
         message: {
           id: crypto.randomUUID(),
           role: "assistant",
           type: "text",
-          content: "Hi, I'm Aiva. How can I help you today?",
+          content: greetingContent,
           timestamp: new Date()
         },
         nextState: FlowState.IDLE
@@ -113,13 +132,20 @@ export function getAIResponse(
         }
       }
 
-      // Valid address - return booking summary widget
+      // Valid address - extract service type for confirmation
+      const serviceType = bookingData.scheduleType === 'job'
+        ? 'Job'
+        : bookingData.scheduleType === 'estimate'
+        ? 'Estimate'
+        : 'Service'
+
+      // Valid address - return booking summary widget with detail confirmation
       return {
         message: {
           id: crypto.randomUUID(),
           role: "assistant",
           type: "widget:booking_summary",
-          content: "Perfect, I found availability for that area.",
+          content: `I found: ${serviceType} service at ${userInput}. Let me check availability.`,
           timestamp: new Date(),
           data: {
             client: {

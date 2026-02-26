@@ -8,6 +8,8 @@ type ChatState = {
   bookingData: BookingData
   isTyping: boolean
   quickActionsUsed: boolean
+  sessionUuid: string | null
+  clientName: string | null
 }
 
 type ChatAction =
@@ -17,13 +19,17 @@ type ChatAction =
   | { type: "SET_TYPING"; payload: boolean }
   | { type: "USE_QUICK_ACTION" }
   | { type: "LOCK_MESSAGE"; payload: { messageId: string } }
+  | { type: "SET_SESSION_UUID"; payload: string }
+  | { type: "SET_CLIENT_NAME"; payload: string }
 
 const initialState: ChatState = {
   messages: [],
   flowState: FlowState.IDLE,
   bookingData: {},
   isTyping: false,
-  quickActionsUsed: false
+  quickActionsUsed: false,
+  sessionUuid: null,
+  clientName: null
 }
 
 function chatReducer(state: ChatState, action: ChatAction): ChatState {
@@ -63,6 +69,10 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
       })
       return { ...state, messages }
     }
+    case "SET_SESSION_UUID":
+      return { ...state, sessionUuid: action.payload }
+    case "SET_CLIENT_NAME":
+      return { ...state, clientName: action.payload }
     default:
       return state
   }
