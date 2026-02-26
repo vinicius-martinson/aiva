@@ -9,14 +9,14 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Chat Core
 
-- [ ] **CHAT-01**: VA can send text messages via input bar (Enter to send, Shift+Enter for newline)
-- [ ] **CHAT-02**: AI messages render left-aligned with AI avatar and sender label
-- [ ] **CHAT-03**: VA messages render right-aligned with blue bubble and timestamp
+- [x] **CHAT-01**: VA can send text messages via input bar (Enter to send, Shift+Enter for newline)
+- [x] **CHAT-02**: AI messages render left-aligned with AI avatar and sender label
+- [x] **CHAT-03**: VA messages render right-aligned with blue bubble and timestamp
 - [ ] **CHAT-04**: Typing indicator shows animated dots while AI is processing a response
 - [ ] **CHAT-05**: Quick action buttons render below first AI greeting (Schedule a Job, Create Estimate, View Calendar)
 - [ ] **CHAT-06**: Quick action buttons disappear after one is clicked
-- [ ] **CHAT-07**: Chat auto-scrolls to newest message when new messages are added
-- [ ] **CHAT-08**: AI disclaimer text renders below input bar ("AI can make mistakes...")
+- [x] **CHAT-07**: Chat auto-scrolls to newest message when new messages are added
+- [x] **CHAT-08**: AI disclaimer text renders below input bar ("AI can make mistakes...")
 
 ### Booking Flow
 
@@ -37,8 +37,8 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **LAYOUT-01**: Three-column desktop layout renders with left sidebar (~260px), center chat (flex-1), right context panel (~300px)
 - [x] **LAYOUT-02**: Left sidebar shows Aiva logo/branding, grouped nav items with icons, and user footer
 - [x] **LAYOUT-03**: AI Assistant nav item shows active state (dark background, white text) on intake page
-- [ ] **LAYOUT-04**: New Chat button in header resets conversation state to IDLE and clears messages
-- [ ] **LAYOUT-05**: Chat header shows AI icon + "AI Scheduling Assistant" title + New Chat button + VA avatar
+- [x] **LAYOUT-04**: New Chat button in header resets conversation state to IDLE and clears messages
+- [x] **LAYOUT-05**: Chat header shows AI icon + "AI Scheduling Assistant" title + New Chat button + VA avatar
 
 ### Call Context
 
@@ -109,14 +109,14 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CHAT-01 | Phase 1 | Pending |
-| CHAT-02 | Phase 1 | Pending |
-| CHAT-03 | Phase 1 | Pending |
+| CHAT-01 | Phase 1 | Complete |
+| CHAT-02 | Phase 1 | Complete |
+| CHAT-03 | Phase 1 | Complete |
 | CHAT-04 | Phase 2 | Pending |
 | CHAT-05 | Phase 2 | Pending |
 | CHAT-06 | Phase 2 | Pending |
-| CHAT-07 | Phase 1 | Pending |
-| CHAT-08 | Phase 1 | Pending |
+| CHAT-07 | Phase 1 | Complete |
+| CHAT-08 | Phase 1 | Complete |
 | BOOK-01 | Phase 2 | Pending |
 | BOOK-02 | Phase 2 | Pending |
 | BOOK-03 | Phase 2 | Pending |
@@ -131,8 +131,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LAYOUT-01 | Phase 1 | Complete |
 | LAYOUT-02 | Phase 1 | Complete |
 | LAYOUT-03 | Phase 1 | Complete |
-| LAYOUT-04 | Phase 1 | Pending |
-| LAYOUT-05 | Phase 1 | Pending |
+| LAYOUT-04 | Phase 1 | Complete |
+| LAYOUT-05 | Phase 1 | Complete |
 | CTX-01 | Phase 3 | Pending |
 | CTX-02 | Phase 3 | Pending |
 | CTX-03 | Phase 3 | Pending |
