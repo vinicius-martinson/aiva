@@ -47,10 +47,13 @@ Plans:
   6. Quick action buttons appear on first greeting and disappear after one is clicked
   7. Widgets lock to read-only after VA submits selection
   8. Error states render for non-serviceable address and unknown client scenarios
-**Plans**: TBD
+**Plans**: 4 plans in 3 waves
 
 Plans:
-- TBD (to be created during phase planning)
+- [ ] 02-01-PLAN.md (Wave 1) — Booking types, state machine, mock data/engine, address validator — BOOK-01, BOOK-07, BOOK-08, BOOK-09, BOOK-11
+- [ ] 02-02-PLAN.md (Wave 2) — Typing indicator, quick actions, MessageBubble widget rendering — CHAT-04, CHAT-05, CHAT-06
+- [ ] 02-03-PLAN.md (Wave 2) — Schedule Type widget, Booking Summary widget, TimeSlotCard — BOOK-02, BOOK-03, BOOK-04, BOOK-05, BOOK-10
+- [ ] 02-04-PLAN.md (Wave 3) — Full flow integration, end-to-end wiring, human verification — BOOK-06, BOOK-09, BOOK-11
 
 ### Phase 3: Context Integration & Mock Engine
 **Goal**: VA sees live call context with client info and previous jobs, interacts with mock AI that extracts booking details from text, and can toggle voice input simulation
@@ -80,9 +83,9 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Chat UI | 0/2 | Planned | - |
-| 2. Booking Flow & Interactive Widgets | 0/TBD | Not started | - |
+| 2. Booking Flow & Interactive Widgets | 0/4 | Planned | - |
 | 3. Context Integration & Mock Engine | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-26*
-*Last updated: 2026-02-26 after Phase 1 planning*
+*Last updated: 2026-02-26 after Phase 2 planning*
