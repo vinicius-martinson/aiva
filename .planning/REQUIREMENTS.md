@@ -42,14 +42,14 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Call Context
 
-- [ ] **CTX-01**: Right panel shows "Call Context" header with green Live badge (animated pulse)
-- [ ] **CTX-02**: Client card displays initials avatar, name (bold), and phone number
-- [ ] **CTX-03**: Call details section shows Queue, Duration (live timer), and Call Type as label-value pairs
+- [x] **CTX-01**: Right panel shows "Call Context" header with green Live badge (animated pulse)
+- [x] **CTX-02**: Client card displays initials avatar, name (bold), and phone number
+- [x] **CTX-03**: Call details section shows Queue, Duration (live timer), and Call Type as label-value pairs
 - [ ] **CTX-04**: Previous Jobs section lists job cards with name, date, and status badge (Completed = green)
-- [ ] **CTX-05**: URL parameter `customer_uuid` pre-populates client data in context panel and chat
-- [ ] **CTX-06**: URL parameter `phone_number` used as fallback lookup when customer_uuid absent
-- [ ] **CTX-07**: URL parameter `csr_ai_phone_session_uuid` stored in chat context for future backend use
-- [ ] **CTX-08**: Unknown caller state renders when no client found from URL params
+- [x] **CTX-05**: URL parameter `customer_uuid` pre-populates client data in context panel and chat
+- [x] **CTX-06**: URL parameter `phone_number` used as fallback lookup when customer_uuid absent
+- [x] **CTX-07**: URL parameter `csr_ai_phone_session_uuid` stored in chat context for future backend use
+- [x] **CTX-08**: Unknown caller state renders when no client found from URL params
 
 ### Audio Simulation
 
@@ -61,8 +61,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Mock Engine
 
 - [x] **MOCK-01**: All data fetching goes through lib/api.ts abstraction layer (single swap-out point for real backend)
-- [ ] **MOCK-02**: Mock AI responses are deterministic, keyed to current FlowState
-- [ ] **MOCK-03**: Simulated delay (600-1000ms) before AI responses for realistic feel
+- [x] **MOCK-02**: Mock AI responses are deterministic, keyed to current FlowState
+- [x] **MOCK-03**: Simulated delay (600-1000ms) before AI responses for realistic feel
 - [x] **MOCK-04**: Mock client data includes Sarah Johnson profile with previous jobs
 - [x] **MOCK-05**: Mock time slots include 3 available slots with dates and times
 
@@ -133,21 +133,21 @@ Which phases cover which requirements. Updated during roadmap creation.
 | LAYOUT-03 | Phase 1 | Complete |
 | LAYOUT-04 | Phase 1 | Complete |
 | LAYOUT-05 | Phase 1 | Complete |
-| CTX-01 | Phase 3 | Pending |
-| CTX-02 | Phase 3 | Pending |
-| CTX-03 | Phase 3 | Pending |
+| CTX-01 | Phase 3 | Complete |
+| CTX-02 | Phase 3 | Complete |
+| CTX-03 | Phase 3 | Complete |
 | CTX-04 | Phase 3 | Pending |
-| CTX-05 | Phase 3 | Pending |
-| CTX-06 | Phase 3 | Pending |
-| CTX-07 | Phase 3 | Pending |
-| CTX-08 | Phase 3 | Pending |
+| CTX-05 | Phase 3 | Complete |
+| CTX-06 | Phase 3 | Complete |
+| CTX-07 | Phase 3 | Complete |
+| CTX-08 | Phase 3 | Complete |
 | AUDIO-01 | Phase 3 | Complete |
 | AUDIO-02 | Phase 3 | Complete |
 | AUDIO-03 | Phase 3 | Complete |
 | AUDIO-04 | Phase 3 | Complete |
 | MOCK-01 | Phase 3 | Complete |
-| MOCK-02 | Phase 3 | Pending |
-| MOCK-03 | Phase 3 | Pending |
+| MOCK-02 | Phase 3 | Complete |
+| MOCK-03 | Phase 3 | Complete |
 | MOCK-04 | Phase 3 | Complete |
 | MOCK-05 | Phase 3 | Complete |
 
