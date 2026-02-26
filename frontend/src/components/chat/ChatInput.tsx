@@ -2,12 +2,13 @@ import { useState, type KeyboardEvent } from "react"
 import { Paperclip, Mic, ArrowUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useChat } from "@/contexts/ChatContext"
+import { getAIResponse } from "@/lib/mockEngine"
 
 export function ChatInput() {
-  const { dispatch } = useChat()
+  const { state, dispatch } = useChat()
   const [input, setInput] = useState("")
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const trimmed = input.trim()
     if (!trimmed) return
 
@@ -25,19 +26,34 @@ export function ChatInput() {
 
     setInput("")
 
-    // Hardcoded AI response after delay
-    setTimeout(() => {
+    // Show typing indicator
+    dispatch({ type: "SET_TYPING", payload: true })
+
+    // Random delay 600-1000ms for typing effect
+    await new Promise(r => setTimeout(r, Math.floor(Math.random() * 400) + 600))
+
+    // Hide typing indicator
+    dispatch({ type: "SET_TYPING", payload: false })
+
+    // Get AI response from mock engine
+    const response = getAIResponse(state.flowState, trimmed, state.bookingData)
+
+    // Add AI response message
+    dispatch({
+      type: "ADD_MESSAGE",
+      payload: response.message,
+    })
+
+    // Transition state if needed
+    if (response.nextState !== state.flowState) {
       dispatch({
-        type: "ADD_MESSAGE",
+        type: "TRANSITION_STATE",
         payload: {
-          id: crypto.randomUUID(),
-          role: "assistant",
-          type: "text",
-          content: "I received your message. How can I help you today?",
-          timestamp: new Date(),
+          nextState: response.nextState,
+          data: response.data,
         },
       })
-    }, 600)
+    }
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -65,6 +81,7 @@ export function ChatInput() {
           placeholder="Type a message or ask me anything..."
           rows={1}
           className="flex-1 outline-none text-sm resize-none bg-transparent py-1 max-h-32 leading-relaxed"
+          disabled={state.isTyping}
         />
         <button
           className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors shrink-0"
@@ -77,7 +94,7 @@ export function ChatInput() {
           size="icon"
           className="rounded-full bg-blue-600 hover:bg-blue-700 h-8 w-8 shrink-0"
           onClick={handleSend}
-          disabled={!input.trim()}
+          disabled={!input.trim() || state.isTyping}
           aria-label="Send message"
         >
           <ArrowUp className="h-4 w-4" />

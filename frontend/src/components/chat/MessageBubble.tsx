@@ -1,6 +1,8 @@
-import type { ChatMessage, TextMessage } from "@/types/chat"
+import type { ChatMessage, TextMessage, ScheduleTypeMessage, BookingSummaryMessage } from "@/types/chat"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Sparkles } from "lucide-react"
+import { ScheduleTypeWidget } from "@/components/widgets/ScheduleTypeWidget"
+import { BookingSummaryWidget } from "@/components/widgets/BookingSummaryWidget"
 
 function formatTime(date: Date): string {
   return date.toLocaleTimeString("en-US", {
@@ -68,20 +70,30 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
   switch (message.type) {
     case "text":
       return <AIBubble message={message} />
-    case "widget:schedule_type":
+    case "widget:schedule_type": {
+      const schedMsg = message as ScheduleTypeMessage
       return (
         <AIWidgetBubble message={message}>
-          {/* Widget component will be imported in Plan 04 integration or rendered here */}
-          <div data-widget="schedule_type" />
+          <ScheduleTypeWidget
+            messageId={schedMsg.id}
+            options={schedMsg.data.options}
+            locked={schedMsg.data.locked}
+          />
         </AIWidgetBubble>
       )
-    case "widget:booking_summary":
+    }
+    case "widget:booking_summary": {
+      const bookMsg = message as BookingSummaryMessage
       return (
         <AIWidgetBubble message={message}>
-          {/* Widget component will be imported in Plan 04 integration or rendered here */}
-          <div data-widget="booking_summary" />
+          <BookingSummaryWidget
+            messageId={bookMsg.id}
+            data={bookMsg.data}
+            locked={bookMsg.data.locked}
+          />
         </AIWidgetBubble>
       )
+    }
     default:
       return <AIBubble message={message as TextMessage} />
   }
