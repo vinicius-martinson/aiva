@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: unknown
-last_updated: "2026-02-26T18:43:31.580Z"
+status: in_progress
+last_updated: "2026-02-26T19:29:26Z"
 progress:
-  total_phases: 1
+  total_phases: 3
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 6
+  completed_plans: 3
 ---
 
 # Project State
@@ -18,34 +18,36 @@ progress:
 See: .planning/PROJECT.md (updated 2026-02-26)
 
 **Core value:** VA can complete a full job booking through a single chat conversation, faster and with fewer errors than manual form entry.
-**Current focus:** Phase 1: Foundation & Chat UI
+**Current focus:** Phase 2: Booking Flow & Interactive Widgets
 
 ## Current Position
 
-Phase: 1 of 3 (Foundation & Chat UI)
-Plan: 2 of 2 in current phase
-Status: Phase 01 complete — all plans executed
-Last activity: 2026-02-26 — Plan 01-02 executed (3 tasks, 3 commits)
+Phase: 2 of 3 (Booking Flow & Interactive Widgets)
+Plan: 1 of 4 in current phase
+Status: Phase 02 in progress — 1/4 plans executed
+Last activity: 2026-02-26 — Plan 02-01 executed (2 tasks, 3 commits)
 
-Progress: [██████████] 100%
+Progress: [███░░░░░░░] 33% (3 of 9 total plans complete)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
+- Total plans completed: 3
 - Average duration: 4 min
-- Total execution time: 8 min
+- Total execution time: 13 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-foundation-chat-ui | 2/2 | 8 min | 4 min |
+| 02-booking-flow-interactive-widgets | 1/4 | 5 min | 5 min |
 
 **Recent Trend:**
 - 01-01: 5 min (3 tasks, 24 files)
 - 01-02: 3 min (3 tasks, 9 files)
-- Trend: Consistent velocity, faster on second plan
+- 02-01: 5 min (2 tasks, 6 files)
+- Trend: Consistent velocity across phases
 
 *Updated after each plan completion*
 
@@ -65,6 +67,10 @@ Recent decisions affecting current work:
 - Used textarea for message input to support Shift+Enter newlines natively (01-02)
 - Defined Phase 2 widget types upfront in discriminated union for forward compatibility (01-02)
 - Used crypto.randomUUID() for message IDs — browser-native, no extra dependency (01-02)
+- Used string union type + const object pattern for FlowState instead of enum (erasableSyntaxOnly compliance) (02-01)
+- CLEAR_MESSAGES resets entire state to initialState, not just messages (proper conversation reset) (02-01)
+- Mock time slots computed dynamically relative to today+2 days (avoids stale fixture dates) (02-01)
+- Address validator uses keyword-based rejection rather than external API (mock-first approach) (02-01)
 
 ### Pending Todos
 
@@ -77,5 +83,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-26
-Stopped at: Completed 01-02-PLAN.md (Chat System — all Phase 01 plans done)
-Resume file: .planning/phases/01-foundation-chat-ui/01-02-SUMMARY.md
+Stopped at: Completed 02-01-PLAN.md (Booking Flow Foundation)
+Resume file: .planning/phases/02-booking-flow-interactive-widgets/02-01-SUMMARY.md
