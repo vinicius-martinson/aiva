@@ -28,10 +28,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. AI messages render left-aligned with AI avatar and sender label
   4. Chat automatically scrolls to newest message when messages are added
   5. New Chat button in header resets conversation and clears all messages
-**Plans**: TBD
+**Plans**: 2 plans in 2 waves
 
 Plans:
-- TBD (to be created during phase planning)
+- 01-01 (Wave 1): Project Setup + Layout Shell + Sidebar — LAYOUT-01, LAYOUT-02, LAYOUT-03
+- 01-02 (Wave 2): Chat State + Components + Integration — CHAT-01, CHAT-02, CHAT-03, CHAT-07, CHAT-08, LAYOUT-04, LAYOUT-05
 
 ### Phase 2: Booking Flow & Interactive Widgets
 **Goal**: VA can complete full job booking through conversational flow with interactive widgets for schedule type selection, address input, and time slot confirmation
@@ -78,10 +79,10 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Chat UI | 0/TBD | Not started | - |
+| 1. Foundation & Chat UI | 0/2 | Planned | - |
 | 2. Booking Flow & Interactive Widgets | 0/TBD | Not started | - |
 | 3. Context Integration & Mock Engine | 0/TBD | Not started | - |
 
 ---
 *Roadmap created: 2026-02-26*
-*Last updated: 2026-02-26*
+*Last updated: 2026-02-26 after Phase 1 planning*
