@@ -60,11 +60,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Mock Engine
 
-- [ ] **MOCK-01**: All data fetching goes through lib/api.ts abstraction layer (single swap-out point for real backend)
+- [x] **MOCK-01**: All data fetching goes through lib/api.ts abstraction layer (single swap-out point for real backend)
 - [ ] **MOCK-02**: Mock AI responses are deterministic, keyed to current FlowState
 - [ ] **MOCK-03**: Simulated delay (600-1000ms) before AI responses for realistic feel
-- [ ] **MOCK-04**: Mock client data includes Sarah Johnson profile with previous jobs
-- [ ] **MOCK-05**: Mock time slots include 3 available slots with dates and times
+- [x] **MOCK-04**: Mock client data includes Sarah Johnson profile with previous jobs
+- [x] **MOCK-05**: Mock time slots include 3 available slots with dates and times
 
 ## v2 Requirements
 
@@ -145,11 +145,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUDIO-02 | Phase 3 | Complete |
 | AUDIO-03 | Phase 3 | Complete |
 | AUDIO-04 | Phase 3 | Complete |
-| MOCK-01 | Phase 3 | Pending |
+| MOCK-01 | Phase 3 | Complete |
 | MOCK-02 | Phase 3 | Pending |
 | MOCK-03 | Phase 3 | Pending |
-| MOCK-04 | Phase 3 | Pending |
-| MOCK-05 | Phase 3 | Pending |
+| MOCK-04 | Phase 3 | Complete |
+| MOCK-05 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 41 total
