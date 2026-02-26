@@ -33,7 +33,7 @@ export function useTranscription() {
               { text: data.text, timestamp: Date.now() },
             ]);
           } else if (data.is_final) {
-            setTranscripts([data.transcript]);
+            setTranscripts((prev) => [...prev, data.transcript]);
             setInterimTranscript("");
           } else {
             setInterimTranscript(data.transcript);

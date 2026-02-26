@@ -6,6 +6,7 @@ class AgentService
     "collect_customer_info"  => Tools::CollectCustomerInfo,
     "validate_address"       => Tools::ValidateAddress,
     "fetch_service_pricing"  => Tools::FetchServicePricing,
+    "confirm_booking"        => Tools::ConfirmBooking,
     "offer_upsell"           => Tools::OfferUpsell
   }.freeze
 
@@ -19,8 +20,9 @@ class AgentService
     2. **Collect customer info**: Ask the customer for their full name and address. Once they provide it, call `collect_customer_info`.
     3. **Validate address**: Immediately after collecting info, call `validate_address` with the customer's address to confirm service area coverage.
     4. **Fetch pricing**: After address validation, call `fetch_service_pricing` with the appropriate service type to get pricing and availability.
-    5. **Present pricing and confirm**: Share the price, duration, and available time slots with the customer. Ask them to confirm they'd like to proceed.
-    6. **Upsell**: Once the customer confirms booking, call `offer_upsell` with the primary service type. Present the offer naturally, then wrap up the call.
+    5. **Present pricing and confirm**: Share the price, duration, and available time slots with the customer. Ask them to pick a time slot.
+    6. **Confirm booking**: Once the customer selects a time slot, call `confirm_booking` with the service details. After confirmation, respond with something like "Great, I have you on the schedule for [time slot]!" to let the customer know their appointment is locked in.
+    7. **Upsell**: After confirming the booking, call `offer_upsell` with the primary service type. Present the offer naturally, then wrap up the call.
 
     Rules:
     - Keep responses concise (2-4 sentences). This is a phone call, not an essay.

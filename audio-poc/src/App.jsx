@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="app">
       <h1>Audio Transcription POC</h1>
-      <p className="subtitle">Browser Mic → Rails → Whisper (local)</p>
+      <p className="subtitle">Browser Mic → Rails → Faster Whisper (local)</p>
 
       <button
         className={`record-btn ${isRecording ? "recording" : ""}`}
