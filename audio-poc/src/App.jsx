@@ -6,6 +6,7 @@ function App() {
     isRecording,
     transcripts,
     interimTranscript,
+    agentMessages,
     error,
     startRecording,
     stopRecording,
@@ -43,6 +44,19 @@ function App() {
           )}
         </div>
       </div>
+
+      {agentMessages.length > 0 && (
+        <div className="agent-panel">
+          <h2>Agent Script</h2>
+          <div className="agent-messages">
+            {agentMessages.map((msg, i) => (
+              <div key={i} className="agent-message">
+                {msg.text}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

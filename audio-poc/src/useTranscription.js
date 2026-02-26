@@ -7,6 +7,7 @@ export function useTranscription() {
   const [isRecording, setIsRecording] = useState(false);
   const [transcripts, setTranscripts] = useState([]);
   const [interimTranscript, setInterimTranscript] = useState("");
+  const [agentMessages, setAgentMessages] = useState([]);
   const [error, setError] = useState(null);
 
   const mediaRecorderRef = useRef(null);
@@ -18,6 +19,7 @@ export function useTranscription() {
       setError(null);
       setTranscripts([]);
       setInterimTranscript("");
+      setAgentMessages([]);
 
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       streamRef.current = stream;
@@ -25,12 +27,15 @@ export function useTranscription() {
       // Subscribe to ActionCable channel
       const subscription = cable.subscriptions.create("TranscriptionChannel", {
         received(data) {
-          if (data.is_final) {
-            // Final transcript replaces everything when recording stops
+          if (data.type === "agent_text") {
+            setAgentMessages((prev) => [
+              ...prev,
+              { text: data.text, timestamp: Date.now() },
+            ]);
+          } else if (data.is_final) {
             setTranscripts([data.transcript]);
             setInterimTranscript("");
           } else {
-            // Interim: full transcript so far, replaces previous interim
             setInterimTranscript(data.transcript);
           }
         },
@@ -86,6 +91,7 @@ export function useTranscription() {
     isRecording,
     transcripts,
     interimTranscript,
+    agentMessages,
     error,
     startRecording,
     stopRecording,

@@ -87,3 +87,33 @@ h1 {
 .interim {
   color: #6b7280;
 }
+
+.agent-panel {
+  margin-top: 2rem;
+  border: 1px solid #a7f3d0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: #ecfdf5;
+  min-height: 120px;
+}
+
+.agent-panel h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: #065f46;
+}
+
+.agent-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.agent-message {
+  padding: 0.75rem 1rem;
+  background: #d1fae5;
+  border-radius: 6px;
+  color: #064e3b;
+  line-height: 1.5;
+  font-size: 1rem;
+}
