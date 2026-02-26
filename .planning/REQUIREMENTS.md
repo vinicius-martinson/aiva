@@ -34,9 +34,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Layout & Navigation
 
-- [ ] **LAYOUT-01**: Three-column desktop layout renders with left sidebar (~260px), center chat (flex-1), right context panel (~300px)
-- [ ] **LAYOUT-02**: Left sidebar shows Aiva logo/branding, grouped nav items with icons, and user footer
-- [ ] **LAYOUT-03**: AI Assistant nav item shows active state (dark background, white text) on intake page
+- [x] **LAYOUT-01**: Three-column desktop layout renders with left sidebar (~260px), center chat (flex-1), right context panel (~300px)
+- [x] **LAYOUT-02**: Left sidebar shows Aiva logo/branding, grouped nav items with icons, and user footer
+- [x] **LAYOUT-03**: AI Assistant nav item shows active state (dark background, white text) on intake page
 - [ ] **LAYOUT-04**: New Chat button in header resets conversation state to IDLE and clears messages
 - [ ] **LAYOUT-05**: Chat header shows AI icon + "AI Scheduling Assistant" title + New Chat button + VA avatar
 
@@ -128,9 +128,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BOOK-09 | Phase 2 | Pending |
 | BOOK-10 | Phase 2 | Pending |
 | BOOK-11 | Phase 2 | Pending |
-| LAYOUT-01 | Phase 1 | Pending |
-| LAYOUT-02 | Phase 1 | Pending |
-| LAYOUT-03 | Phase 1 | Pending |
+| LAYOUT-01 | Phase 1 | Complete |
+| LAYOUT-02 | Phase 1 | Complete |
+| LAYOUT-03 | Phase 1 | Complete |
 | LAYOUT-04 | Phase 1 | Pending |
 | LAYOUT-05 | Phase 1 | Pending |
 | CTX-01 | Phase 3 | Pending |

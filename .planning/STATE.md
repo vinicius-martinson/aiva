@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-02-26)
 ## Current Position
 
 Phase: 1 of 3 (Foundation & Chat UI)
-Plan: 0 of 2 in current phase
-Status: Planned — ready to execute
-Last activity: 2026-02-26 — Phase 1 planned with 2 plans in 2 waves
+Plan: 1 of 2 in current phase
+Status: Executing — Plan 01 complete
+Last activity: 2026-02-26 — Plan 01-01 executed (3 tasks, 3 commits)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: N/A
-- Total execution time: 0 hours
+- Total plans completed: 1
+- Average duration: 5 min
+- Total execution time: 5 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 01-foundation-chat-ui | 1/2 | 5 min | 5 min |
 
 **Recent Trend:**
-- No plans completed yet
-- Trend: N/A
+- 01-01: 5 min (3 tasks, 24 files)
+- Trend: First plan, baseline established
 
 *Updated after each plan completion*
 
@@ -46,6 +46,8 @@ Recent decisions affecting current work:
 - Mock-first with swap-out layer (lib/api.ts abstraction allows switching mock to real with minimal changes)
 - State machine over free-form chat (deterministic flow ensures demo reliability)
 - Standalone frontend (backend integration is separate future project)
+- Used Tailwind CSS v3 (not v4) for Shadcn/ui compatibility (01-01)
+- Added custom sidebar CSS variables for dark sidebar theming (01-01)
 
 ### Pending Todos
 
@@ -58,5 +60,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-26
-Stopped at: Phase 1 planned, ready to execute
-Resume file: None
+Stopped at: Completed 01-01-PLAN.md (Project Setup + Layout Shell + Sidebar)
+Resume file: .planning/phases/01-foundation-chat-ui/01-01-SUMMARY.md
