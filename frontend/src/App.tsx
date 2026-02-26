@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { AppLayout } from "@/components/layout/AppLayout"
 import { ChatProvider, useChat } from "@/contexts/ChatContext"
 import { ChatHeader } from "@/components/chat/ChatHeader"
@@ -7,10 +7,13 @@ import { ChatInput } from "@/components/chat/ChatInput"
 
 function ChatApp() {
   const { state, dispatch } = useChat()
+  const greetingSent = useRef(false)
 
   useEffect(() => {
-    // Send initial AI greeting on mount (only if no messages yet)
     if (state.messages.length === 0) {
+      // Guard against React strict mode double-fire
+      if (greetingSent.current) return
+      greetingSent.current = true
       // BOOK-09: Unknown client error would be triggered here by URL param check (Phase 3)
       // For Phase 2, the ERROR FlowState + mockEngine handles the display path
       dispatch({
@@ -23,8 +26,11 @@ function ChatApp() {
           timestamp: new Date()
         }
       })
+    } else {
+      // Reset guard when messages exist, so CLEAR_MESSAGES can re-trigger greeting
+      greetingSent.current = false
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps -- intentional mount-only
+  }, [state.messages.length]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
