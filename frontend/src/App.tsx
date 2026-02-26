@@ -1,15 +1,12 @@
-import { Sidebar } from "@/components/layout/Sidebar"
+import { AppLayout } from "@/components/layout/AppLayout"
 
 function App() {
   return (
-    <div className="flex h-screen">
-      <div className="w-[260px]">
-        <Sidebar />
-      </div>
+    <AppLayout>
       <div className="flex-1 flex items-center justify-center">
-        <p className="text-muted-foreground">Chat area - coming soon</p>
+        <p className="text-muted-foreground">Chat area — implemented in Plan 02</p>
       </div>
-    </div>
+    </AppLayout>
   )
 }
 
