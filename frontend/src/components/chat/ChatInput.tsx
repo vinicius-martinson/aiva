@@ -1,12 +1,59 @@
-import { useState, type KeyboardEvent } from "react"
+import { useState, useCallback, useEffect, type KeyboardEvent } from "react"
 import { Paperclip, Mic, ArrowUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useChat } from "@/contexts/ChatContext"
 import { getAIResponse } from "@/lib/mockEngine"
+import { useTranscript } from "@/hooks/useTranscript"
+import { FlowState } from "@/types/booking"
 
 export function ChatInput() {
   const { state, dispatch } = useChat()
   const [input, setInput] = useState("")
+  const [isListening, setIsListening] = useState(false)
+
+  // Handle transcript chunk injection
+  const handleChunk = useCallback((text: string) => {
+    dispatch({
+      type: "ADD_MESSAGE",
+      payload: {
+        id: crypto.randomUUID(),
+        role: "system",
+        type: "text",
+        content: text,
+        timestamp: new Date(),
+      },
+    })
+  }, [dispatch])
+
+  // Handle transcript completion (triggers AI classifying)
+  const handleTranscriptComplete = useCallback(() => {
+    setIsListening(false)
+
+    // Show typing indicator
+    dispatch({ type: "SET_TYPING", payload: true })
+
+    // Random delay 600-1000ms for typing effect
+    const delay = Math.floor(Math.random() * 400) + 600
+    setTimeout(() => {
+      dispatch({ type: "SET_TYPING", payload: false })
+      dispatch({
+        type: "TRANSITION_STATE",
+        payload: {
+          nextState: FlowState.CLASSIFYING,
+        },
+      })
+    }, delay)
+  }, [dispatch])
+
+  // Initialize transcript hook
+  useTranscript(isListening, handleChunk, handleTranscriptComplete)
+
+  // Reset listening state when messages are cleared (New Chat)
+  useEffect(() => {
+    if (state.messages.length === 0 && isListening) {
+      setIsListening(false)
+    }
+  }, [state.messages.length, isListening])
 
   const handleSend = async () => {
     const trimmed = input.trim()
@@ -84,11 +131,16 @@ export function ChatInput() {
           disabled={state.isTyping}
         />
         <button
-          className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors shrink-0"
-          aria-label="Voice input"
+          onClick={() => setIsListening(!isListening)}
+          className={`p-1.5 transition-colors shrink-0 ${
+            isListening
+              ? "text-red-500"
+              : "text-gray-400 hover:text-gray-600"
+          }`}
+          aria-label={isListening ? "Stop listening" : "Start listening"}
           type="button"
         >
-          <Mic className="h-4 w-4" />
+          <Mic className={`h-4 w-4 ${isListening ? "fill-current animate-pulse" : ""}`} />
         </button>
         <Button
           size="icon"
