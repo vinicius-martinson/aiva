@@ -56,12 +56,12 @@ Plans:
 - [ ] 02-04-PLAN.md (Wave 3) — Full flow integration, end-to-end wiring, human verification — BOOK-06, BOOK-09, BOOK-11
 
 ### Phase 3: Context Integration & Mock Engine
-**Goal**: VA sees live call context with client info and previous jobs, interacts with mock AI that extracts booking details from text, and can toggle voice input simulation
+**Goal**: VA sees live call context with client info in the right panel, interacts with mock AI that extracts booking details from text, and can toggle voice input simulation with mock transcript injection
 **Depends on**: Phase 2
 **Requirements**: CTX-01, CTX-02, CTX-03, CTX-04, CTX-05, CTX-06, CTX-07, CTX-08, AUDIO-01, AUDIO-02, AUDIO-03, AUDIO-04, MOCK-01, MOCK-02, MOCK-03, MOCK-04, MOCK-05
 **Success Criteria** (what must be TRUE):
   1. Right panel shows Call Context header with green Live badge (animated pulse), client card with initials avatar and contact info, and call details (queue, duration timer, call type)
-  2. Previous Jobs section displays job cards with name, date, and status badge (Completed = green)
+  2. Previous Jobs section excluded per user decision (deferred)
   3. URL parameters (customer_uuid, phone_number, csr_ai_phone_session_uuid) pre-populate client data in context panel and chat
   4. Unknown caller state renders when no client found from URL params
   5. Mock AI engine extracts service type and address from VA text input and responds appropriately with deterministic responses keyed to flow state
@@ -70,10 +70,12 @@ Plans:
   8. Mic button toggles listening state with filled red icon and pulse animation
   9. Mock transcript chunks inject as system messages every 8-12 seconds during active listening
   10. After 2 transcript injections, mock AI triggers CLASSIFYING state transition
-**Plans**: TBD
+**Plans**: 3 plans in 2 waves
 
 Plans:
-- TBD (to be created during phase planning)
+- [ ] 03-01-PLAN.md (Wave 1) — Data layer: client types, API abstraction, avatar utils, URL param hook, duration hook — MOCK-01, MOCK-04, MOCK-05
+- [ ] 03-02-PLAN.md (Wave 1) — Audio simulation: transcript hook, system message rendering, mic button toggle — AUDIO-01, AUDIO-02, AUDIO-03, AUDIO-04
+- [ ] 03-03-PLAN.md (Wave 2) — Context panel components, URL param integration, context-aware greeting, mock engine enhancement — CTX-01, CTX-02, CTX-03, CTX-04, CTX-05, CTX-06, CTX-07, CTX-08, MOCK-02, MOCK-03
 
 ## Progress
 
@@ -84,8 +86,8 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Foundation & Chat UI | 2/2 | Complete | 2026-02-26 |
 | 2. Booking Flow & Interactive Widgets | 1/4 | In Progress | - |
-| 3. Context Integration & Mock Engine | 0/TBD | Not started | - |
+| 3. Context Integration & Mock Engine | 0/3 | Not started | - |
 
 ---
 *Roadmap created: 2026-02-26*
-*Last updated: 2026-02-26 after Phase 2 planning*
+*Last updated: 2026-02-26 after Phase 3 planning*
