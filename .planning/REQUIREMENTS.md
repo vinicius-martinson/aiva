@@ -12,9 +12,9 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **CHAT-01**: VA can send text messages via input bar (Enter to send, Shift+Enter for newline)
 - [x] **CHAT-02**: AI messages render left-aligned with AI avatar and sender label
 - [x] **CHAT-03**: VA messages render right-aligned with blue bubble and timestamp
-- [ ] **CHAT-04**: Typing indicator shows animated dots while AI is processing a response
-- [ ] **CHAT-05**: Quick action buttons render below first AI greeting (Schedule a Job, Create Estimate, View Calendar)
-- [ ] **CHAT-06**: Quick action buttons disappear after one is clicked
+- [x] **CHAT-04**: Typing indicator shows animated dots while AI is processing a response
+- [x] **CHAT-05**: Quick action buttons render below first AI greeting (Schedule a Job, Create Estimate, View Calendar)
+- [x] **CHAT-06**: Quick action buttons disappear after one is clicked
 - [x] **CHAT-07**: Chat auto-scrolls to newest message when new messages are added
 - [x] **CHAT-08**: AI disclaimer text renders below input bar ("AI can make mistakes...")
 
@@ -112,9 +112,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CHAT-01 | Phase 1 | Complete |
 | CHAT-02 | Phase 1 | Complete |
 | CHAT-03 | Phase 1 | Complete |
-| CHAT-04 | Phase 2 | Pending |
-| CHAT-05 | Phase 2 | Pending |
-| CHAT-06 | Phase 2 | Pending |
+| CHAT-04 | Phase 2 | Complete |
+| CHAT-05 | Phase 2 | Complete |
+| CHAT-06 | Phase 2 | Complete |
 | CHAT-07 | Phase 1 | Complete |
 | CHAT-08 | Phase 1 | Complete |
 | BOOK-01 | Phase 2 | Complete |
