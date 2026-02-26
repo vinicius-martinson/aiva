@@ -17,6 +17,7 @@ export type ScheduleTypeMessage = {
   timestamp: Date
   data: {
     options: Array<{ id: string; label: string; description: string }>
+    locked?: boolean
   }
 }
 
@@ -30,6 +31,7 @@ export type BookingSummaryMessage = {
     client: { name: string; phone: string; address: string }
     timeSlots: Array<{ id: string; datetime: string; duration: string }>
     scheduleType: string
+    locked?: boolean
   }
 }
 
