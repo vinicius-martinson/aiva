@@ -12,6 +12,16 @@ function formatTime(date: Date): string {
   })
 }
 
+function SystemBubble({ message }: { message: TextMessage }) {
+  return (
+    <div className="flex justify-center py-2">
+      <p className="text-xs text-muted-foreground text-center max-w-[80%] px-4 py-1 bg-gray-100 rounded-full">
+        {message.content}
+      </p>
+    </div>
+  )
+}
+
 function AIBubble({ message }: { message: TextMessage }) {
   return (
     <div className="flex gap-3 items-start max-w-[80%]">
@@ -63,6 +73,10 @@ function AIWidgetBubble({ message, children }: { message: ChatMessage; children:
 }
 
 export function MessageBubble({ message }: { message: ChatMessage }) {
+  if (message.role === "system") {
+    return <SystemBubble message={message as TextMessage} />
+  }
+
   if (message.role === "user") {
     return <VABubble message={message as TextMessage} />
   }
