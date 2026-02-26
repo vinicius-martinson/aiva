@@ -25,7 +25,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **BOOK-03**: Selected schedule type card highlights with blue border, Confirm button enables
 - [x] **BOOK-04**: Booking Summary widget renders with client details grid, time slot cards, Draft badge, and Edit/Confirm buttons
 - [x] **BOOK-05**: Time slot cards are selectable with first slot pre-selected by default
-- [ ] **BOOK-06**: Confirm & Create Job button triggers mock job creation and shows success message with job ID
+- [x] **BOOK-06**: Confirm & Create Job button triggers mock job creation and shows success message with job ID
 - [x] **BOOK-07**: Mock AI engine extracts service type and address from VA text input and responds appropriately
 - [x] **BOOK-08**: Error state renders when address is not serviceable (mock toggle)
 - [x] **BOOK-09**: Error state renders for unknown client when no URL params present
@@ -122,7 +122,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | BOOK-03 | Phase 2 | Complete |
 | BOOK-04 | Phase 2 | Complete |
 | BOOK-05 | Phase 2 | Complete |
-| BOOK-06 | Phase 2 | Pending |
+| BOOK-06 | Phase 2 | Complete |
 | BOOK-07 | Phase 2 | Complete |
 | BOOK-08 | Phase 2 | Complete |
 | BOOK-09 | Phase 2 | Complete |
