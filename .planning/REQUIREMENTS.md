@@ -21,15 +21,15 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Booking Flow
 
 - [x] **BOOK-01**: State machine controls conversation flow through states: IDLE → CLASSIFYING → AWAITING_SCHEDULE_TYPE → AWAITING_ADDRESS → VALIDATING_SERVICE → AWAITING_SLOT_SELECTION → CONFIRMING → BOOKED
-- [ ] **BOOK-02**: Schedule Type widget renders as selectable cards (Job / Estimate / Notes Only) inside AI message
-- [ ] **BOOK-03**: Selected schedule type card highlights with blue border, Confirm button enables
-- [ ] **BOOK-04**: Booking Summary widget renders with client details grid, time slot cards, Draft badge, and Edit/Confirm buttons
-- [ ] **BOOK-05**: Time slot cards are selectable with first slot pre-selected by default
+- [x] **BOOK-02**: Schedule Type widget renders as selectable cards (Job / Estimate / Notes Only) inside AI message
+- [x] **BOOK-03**: Selected schedule type card highlights with blue border, Confirm button enables
+- [x] **BOOK-04**: Booking Summary widget renders with client details grid, time slot cards, Draft badge, and Edit/Confirm buttons
+- [x] **BOOK-05**: Time slot cards are selectable with first slot pre-selected by default
 - [ ] **BOOK-06**: Confirm & Create Job button triggers mock job creation and shows success message with job ID
 - [x] **BOOK-07**: Mock AI engine extracts service type and address from VA text input and responds appropriately
 - [x] **BOOK-08**: Error state renders when address is not serviceable (mock toggle)
 - [x] **BOOK-09**: Error state renders for unknown client when no URL params present
-- [ ] **BOOK-10**: Widgets lock to read-only after VA submits their selection
+- [x] **BOOK-10**: Widgets lock to read-only after VA submits their selection
 - [x] **BOOK-11**: Message format supports both text content and structured widget data (compatible with future Anthropic SDK responses)
 
 ### Layout & Navigation
@@ -118,15 +118,15 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CHAT-07 | Phase 1 | Complete |
 | CHAT-08 | Phase 1 | Complete |
 | BOOK-01 | Phase 2 | Complete |
-| BOOK-02 | Phase 2 | Pending |
-| BOOK-03 | Phase 2 | Pending |
-| BOOK-04 | Phase 2 | Pending |
-| BOOK-05 | Phase 2 | Pending |
+| BOOK-02 | Phase 2 | Complete |
+| BOOK-03 | Phase 2 | Complete |
+| BOOK-04 | Phase 2 | Complete |
+| BOOK-05 | Phase 2 | Complete |
 | BOOK-06 | Phase 2 | Pending |
 | BOOK-07 | Phase 2 | Complete |
 | BOOK-08 | Phase 2 | Complete |
 | BOOK-09 | Phase 2 | Complete |
-| BOOK-10 | Phase 2 | Pending |
+| BOOK-10 | Phase 2 | Complete |
 | BOOK-11 | Phase 2 | Complete |
 | LAYOUT-01 | Phase 1 | Complete |
 | LAYOUT-02 | Phase 1 | Complete |
