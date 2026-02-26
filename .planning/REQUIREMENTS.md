@@ -53,10 +53,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Audio Simulation
 
-- [ ] **AUDIO-01**: Mic button in input bar toggles listening state on click
-- [ ] **AUDIO-02**: Active listening shows filled red mic icon with pulse animation
-- [ ] **AUDIO-03**: Mock transcript chunks inject into chat as system messages on a timer (8-12 second intervals)
-- [ ] **AUDIO-04**: After 2 transcript injections, mock AI triggers CLASSIFYING state transition
+- [x] **AUDIO-01**: Mic button in input bar toggles listening state on click
+- [x] **AUDIO-02**: Active listening shows filled red mic icon with pulse animation
+- [x] **AUDIO-03**: Mock transcript chunks inject into chat as system messages on a timer (8-12 second intervals)
+- [x] **AUDIO-04**: After 2 transcript injections, mock AI triggers CLASSIFYING state transition
 
 ### Mock Engine
 
@@ -141,10 +141,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CTX-06 | Phase 3 | Pending |
 | CTX-07 | Phase 3 | Pending |
 | CTX-08 | Phase 3 | Pending |
-| AUDIO-01 | Phase 3 | Pending |
-| AUDIO-02 | Phase 3 | Pending |
-| AUDIO-03 | Phase 3 | Pending |
-| AUDIO-04 | Phase 3 | Pending |
+| AUDIO-01 | Phase 3 | Complete |
+| AUDIO-02 | Phase 3 | Complete |
+| AUDIO-03 | Phase 3 | Complete |
+| AUDIO-04 | Phase 3 | Complete |
 | MOCK-01 | Phase 3 | Pending |
 | MOCK-02 | Phase 3 | Pending |
 | MOCK-03 | Phase 3 | Pending |
