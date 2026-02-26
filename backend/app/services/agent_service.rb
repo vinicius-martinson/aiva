@@ -55,14 +55,14 @@ class AgentService
       assistant_content = response.content.map { |block| serialize_content_block(block) }
       @messages << { role: "assistant", content: assistant_content }
 
-      # Handle each content block
-      tool_uses = []
+      # Collect tool uses first
+      tool_uses = response.content.select { |b| b.type.to_s == "tool_use" }
+
+      # Only broadcast text if there are no tool calls in this response
       response.content.each do |block|
         case block.type.to_s
         when "text"
-          broadcast_agent_text(block.text)
-        when "tool_use"
-          tool_uses << block
+          broadcast_agent_text(block.text) if tool_uses.empty?
         end
       end
 
@@ -96,7 +96,8 @@ class AgentService
 
   def execute_tool(tool_use)
     tool_name = tool_use.name
-    tool_input = tool_use.input.is_a?(Hash) ? tool_use.input : tool_use.input.to_h
+    raw_input = tool_use.input.is_a?(Hash) ? tool_use.input : tool_use.input.to_h
+    tool_input = raw_input.transform_keys(&:to_s)
     tool_use_id = tool_use.id
 
     puts "[TOOL] Calling: #{tool_name}"
