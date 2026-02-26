@@ -92,6 +92,7 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-26
-Stopped at: Mid /gsd:complete-milestone — user chose "Complete as v1.0" with known gaps (Phase 3 unexecuted → v1.1)
-Resume with: /gsd:complete-milestone (pick up from gather_stats step)
+Stopped at: User chose to complete v1.0 with known gaps (Phase 3 → v1.1), then started /gsd:discuss-phase 3
+Resume with: /gsd:discuss-phase 3 (fresh start — no context captured yet)
+Pending: /gsd:complete-milestone still needs to run (gather_stats → archive → tag). Run AFTER discuss-phase 3, or before if you want to close v1.0 first.
 Notes: BOOK-06 fixed in traceability. Phase 3 (CTX, AUDIO, MOCK requirements) acknowledged as known gaps for v1.1.
