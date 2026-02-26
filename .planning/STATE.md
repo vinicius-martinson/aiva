@@ -92,5 +92,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-26
-Stopped at: Completed 02-04-PLAN.md (Full Flow Integration) — all Phase 02 plans done
-Resume file: .planning/phases/02-booking-flow-interactive-widgets/02-04-SUMMARY.md
+Stopped at: Mid /gsd:complete-milestone — user chose "Complete as v1.0" with known gaps (Phase 3 unexecuted → v1.1)
+Resume with: /gsd:complete-milestone (pick up from gather_stats step)
+Notes: BOOK-06 fixed in traceability. Phase 3 (CTX, AUDIO, MOCK requirements) acknowledged as known gaps for v1.1.
