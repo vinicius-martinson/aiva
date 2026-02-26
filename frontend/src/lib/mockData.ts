@@ -1,4 +1,5 @@
 import type { ClientData, TimeSlot, ScheduleTypeOption } from "@/types/booking"
+import type { CallContext } from "@/types/client"
 
 // Mock client - Sarah Johnson with plumbing history
 export const mockClient: ClientData = {
@@ -39,6 +40,13 @@ function generateMockTimeSlots(): TimeSlot[] {
 }
 
 export const mockTimeSlots: TimeSlot[] = generateMockTimeSlots()
+
+// Mock call context - live call metadata
+export const mockCallContext: CallContext = {
+  queue: "General Support",
+  callType: "Inbound",
+  startedAt: new Date()
+}
 
 // Schedule type options - the three workflow types
 export const scheduleTypeOptions: ScheduleTypeOption[] = [
