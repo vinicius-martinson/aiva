@@ -1,7 +1,14 @@
+import { Sidebar } from "@/components/layout/Sidebar"
+
 function App() {
   return (
-    <div className="flex items-center justify-center h-screen">
-      <p className="text-muted-foreground">Aiva - Loading...</p>
+    <div className="flex h-screen">
+      <div className="w-[260px]">
+        <Sidebar />
+      </div>
+      <div className="flex-1 flex items-center justify-center">
+        <p className="text-muted-foreground">Chat area - coming soon</p>
+      </div>
     </div>
   )
 }
