@@ -109,53 +109,53 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CHAT-01 | — | Pending |
-| CHAT-02 | — | Pending |
-| CHAT-03 | — | Pending |
-| CHAT-04 | — | Pending |
-| CHAT-05 | — | Pending |
-| CHAT-06 | — | Pending |
-| CHAT-07 | — | Pending |
-| CHAT-08 | — | Pending |
-| BOOK-01 | — | Pending |
-| BOOK-02 | — | Pending |
-| BOOK-03 | — | Pending |
-| BOOK-04 | — | Pending |
-| BOOK-05 | — | Pending |
-| BOOK-06 | — | Pending |
-| BOOK-07 | — | Pending |
-| BOOK-08 | — | Pending |
-| BOOK-09 | — | Pending |
-| BOOK-10 | — | Pending |
-| BOOK-11 | — | Pending |
-| LAYOUT-01 | — | Pending |
-| LAYOUT-02 | — | Pending |
-| LAYOUT-03 | — | Pending |
-| LAYOUT-04 | — | Pending |
-| LAYOUT-05 | — | Pending |
-| CTX-01 | — | Pending |
-| CTX-02 | — | Pending |
-| CTX-03 | — | Pending |
-| CTX-04 | — | Pending |
-| CTX-05 | — | Pending |
-| CTX-06 | — | Pending |
-| CTX-07 | — | Pending |
-| CTX-08 | — | Pending |
-| AUDIO-01 | — | Pending |
-| AUDIO-02 | — | Pending |
-| AUDIO-03 | — | Pending |
-| AUDIO-04 | — | Pending |
-| MOCK-01 | — | Pending |
-| MOCK-02 | — | Pending |
-| MOCK-03 | — | Pending |
-| MOCK-04 | — | Pending |
-| MOCK-05 | — | Pending |
+| CHAT-01 | Phase 1 | Pending |
+| CHAT-02 | Phase 1 | Pending |
+| CHAT-03 | Phase 1 | Pending |
+| CHAT-04 | Phase 2 | Pending |
+| CHAT-05 | Phase 2 | Pending |
+| CHAT-06 | Phase 2 | Pending |
+| CHAT-07 | Phase 1 | Pending |
+| CHAT-08 | Phase 1 | Pending |
+| BOOK-01 | Phase 2 | Pending |
+| BOOK-02 | Phase 2 | Pending |
+| BOOK-03 | Phase 2 | Pending |
+| BOOK-04 | Phase 2 | Pending |
+| BOOK-05 | Phase 2 | Pending |
+| BOOK-06 | Phase 2 | Pending |
+| BOOK-07 | Phase 2 | Pending |
+| BOOK-08 | Phase 2 | Pending |
+| BOOK-09 | Phase 2 | Pending |
+| BOOK-10 | Phase 2 | Pending |
+| BOOK-11 | Phase 2 | Pending |
+| LAYOUT-01 | Phase 1 | Pending |
+| LAYOUT-02 | Phase 1 | Pending |
+| LAYOUT-03 | Phase 1 | Pending |
+| LAYOUT-04 | Phase 1 | Pending |
+| LAYOUT-05 | Phase 1 | Pending |
+| CTX-01 | Phase 3 | Pending |
+| CTX-02 | Phase 3 | Pending |
+| CTX-03 | Phase 3 | Pending |
+| CTX-04 | Phase 3 | Pending |
+| CTX-05 | Phase 3 | Pending |
+| CTX-06 | Phase 3 | Pending |
+| CTX-07 | Phase 3 | Pending |
+| CTX-08 | Phase 3 | Pending |
+| AUDIO-01 | Phase 3 | Pending |
+| AUDIO-02 | Phase 3 | Pending |
+| AUDIO-03 | Phase 3 | Pending |
+| AUDIO-04 | Phase 3 | Pending |
+| MOCK-01 | Phase 3 | Pending |
+| MOCK-02 | Phase 3 | Pending |
+| MOCK-03 | Phase 3 | Pending |
+| MOCK-04 | Phase 3 | Pending |
+| MOCK-05 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 41 total
-- Mapped to phases: 0
-- Unmapped: 41
+- Mapped to phases: 41
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-26*
-*Last updated: 2026-02-26 after initial definition*
+*Last updated: 2026-02-26 after roadmap creation*
