@@ -1,12 +1,18 @@
 import { AppLayout } from "@/components/layout/AppLayout"
+import { ChatProvider } from "@/contexts/ChatContext"
+import { ChatHeader } from "@/components/chat/ChatHeader"
+import { MessageList } from "@/components/chat/MessageList"
+import { ChatInput } from "@/components/chat/ChatInput"
 
 function App() {
   return (
-    <AppLayout>
-      <div className="flex-1 flex items-center justify-center">
-        <p className="text-muted-foreground">Chat area — implemented in Plan 02</p>
-      </div>
-    </AppLayout>
+    <ChatProvider>
+      <AppLayout>
+        <ChatHeader />
+        <MessageList />
+        <ChatInput />
+      </AppLayout>
+    </ChatProvider>
   )
 }
 
