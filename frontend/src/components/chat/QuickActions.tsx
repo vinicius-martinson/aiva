@@ -44,6 +44,7 @@ export function QuickActions() {
         type: "TRANSITION_STATE",
         payload: { nextState: response.nextState, data: response.data }
       })
+    // eslint-disable-next-line react-hooks/purity
     }, Math.floor(Math.random() * 400) + 600)
   }
 

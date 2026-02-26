@@ -692,9 +692,8 @@ When `isListening === true`:
 
 > Optimized for a 2-day hackathon. Day 1 focuses on structure and core chat flow. Day 2 focuses on widgets, polish, and the demo path.
 
-### Day 1 — Foundation & Chat Core
+Foundation & Chat Core
 
-#### Morning (0–4h)
 - [ ] `npm create vite@latest frontend -- --template react-ts`
 - [ ] Install dependencies: `shadcn/ui`, `tailwindcss`, `react-router-dom`, `lucide-react`, `clsx`, `tailwind-merge`
 - [ ] Configure Shadcn: `npx shadcn@latest init`
@@ -702,7 +701,6 @@ When `isListening === true`:
 - [ ] Create all mock data files in `src/mocks/`
 - [ ] Set up `lib/api.ts` swap-out layer
 
-#### Afternoon (4–8h)
 - [ ] Build `LeftSidebar` with nav items and active state
 - [ ] Build `CallContextPanel` with client card, call details, previous jobs
 - [ ] Build `IntakePage` three-column layout shell
@@ -712,9 +710,8 @@ When `isListening === true`:
 - [ ] Implement `useUrlParams` and wire client pre-population
 - [ ] **Checkpoint:** Full chat flow works with text messages, client loads from URL params
 
-### Day 2 — Widgets, Audio & Demo Polish
+Widgets, Audio & Demo Polish
 
-#### Morning (0–4h)
 - [ ] Build `ScheduleTypeWidget` (Job / Estimate / Notes Only)
 - [ ] Build `BookingSummaryWidget` matching the reference screenshot exactly:
   - Two-column client detail grid
@@ -725,7 +722,6 @@ When `isListening === true`:
 - [ ] Wire all widgets into `ChatMessage` dispatcher
 - [ ] Test complete happy path: URL load → greeting → schedule job message → booking summary → confirm
 
-#### Afternoon (4–8h)
 - [ ] Implement `useAudioCapture` with mock transcript injection
 - [ ] Add mic button behavior and visual indicator
 - [ ] Add `TypingIndicator` component
