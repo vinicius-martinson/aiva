@@ -56,7 +56,8 @@ export async function getTimeSlots(address: string): Promise<TimeSlot[]> {
   // Simulate network delay
   await new Promise(resolve => setTimeout(resolve, 600))
 
-  // Mock implementation: return pre-generated slots
+  // Mock implementation: return pre-generated slots (address unused in mock)
+  void address
   return mockTimeSlots
 
   /* FUTURE REAL API PATTERN:
