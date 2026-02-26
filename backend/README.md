@@ -1,24 +1,55 @@
-# README
+# AIVA Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails 7.1 API-only backend for AIVA.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- Ruby 3.2.3
+- SQLite3
 
-* System dependencies
+## Setup
 
-* Configuration
+```bash
+bundle install
+rails db:create db:migrate
+```
 
-* Database creation
+## Running
 
-* Database initialization
+```bash
+rails server
+```
 
-* How to run the test suite
+Server starts at `http://localhost:3000`.
 
-* Services (job queues, cache servers, search engines, etc.)
+## API Endpoints
 
-* Deployment instructions
+All endpoints are under `/api/v1`.
 
-* ...
+| Resource | Method | Path |
+|---|---|---|
+| Customers | GET | `/api/v1/customers` |
+| Customers | GET | `/api/v1/customers/:id` |
+| Customers | POST | `/api/v1/customers` |
+| Customers | PATCH | `/api/v1/customers/:id` |
+| Customers | DELETE | `/api/v1/customers/:id` |
+| Organizations | GET | `/api/v1/organizations` |
+| Organizations | GET | `/api/v1/organizations/:id` |
+| Organizations | POST | `/api/v1/organizations` |
+| Organizations | PATCH | `/api/v1/organizations/:id` |
+| Organizations | DELETE | `/api/v1/organizations/:id` |
+| Time Slots | GET | `/api/v1/organizations/:organization_id/time_slots` |
+| Time Slots | GET | `/api/v1/organizations/:organization_id/time_slots/:id` |
+| Time Slots | POST | `/api/v1/organizations/:organization_id/time_slots` |
+| Time Slots | PATCH | `/api/v1/organizations/:organization_id/time_slots/:id` |
+| Time Slots | DELETE | `/api/v1/organizations/:organization_id/time_slots/:id` |
+| Service Requests | GET | `/api/v1/service_requests` |
+| Service Requests | GET | `/api/v1/service_requests/:id` |
+| Service Requests | POST | `/api/v1/service_requests` |
+| Service Requests | PATCH | `/api/v1/service_requests/:id` |
+| Service Requests | DELETE | `/api/v1/service_requests/:id` |
+
+## Models
+
+- **Organization** has many **TimeSlots**
+- **Customer** has many **ServiceRequests**
