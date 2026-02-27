@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react"
 import type { ChatMessage, TextMessage, ClassifyVisitMessage, ValidateAddressMessage, ScheduleTypeMessage, BookingSummaryMessage, UpsellMessage } from "@/types/chat"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Sparkles } from "lucide-react"
@@ -6,6 +7,35 @@ import { ValidateAddressWidget } from "@/components/widgets/ValidateAddressWidge
 import { ScheduleTypeWidget } from "@/components/widgets/ScheduleTypeWidget"
 import { BookingSummaryWidget } from "@/components/widgets/BookingSummaryWidget"
 import { UpsellWidget } from "@/components/widgets/UpsellWidget"
+
+const typedMessages = new Set<string>()
+
+function useTypewriter(text: string, id: string, speed = 6) {
+  const alreadyTyped = typedMessages.has(id)
+  const [displayed, setDisplayed] = useState(alreadyTyped ? text : "")
+  const [done, setDone] = useState(alreadyTyped)
+  const indexRef = useRef(alreadyTyped ? text.length : 0)
+
+  useEffect(() => {
+    if (alreadyTyped) return
+
+    const interval = setInterval(() => {
+      indexRef.current += 1
+      if (indexRef.current >= text.length) {
+        setDisplayed(text)
+        setDone(true)
+        typedMessages.add(id)
+        clearInterval(interval)
+      } else {
+        setDisplayed(text.slice(0, indexRef.current))
+      }
+    }, speed)
+
+    return () => clearInterval(interval)
+  }, [text, id, speed, alreadyTyped])
+
+  return { displayed, done }
+}
 
 function formatTime(date: Date): string {
   return date.toLocaleTimeString("en-US", {
@@ -26,6 +56,8 @@ function SystemBubble({ message }: { message: TextMessage }) {
 }
 
 function AIBubble({ message }: { message: TextMessage }) {
+  const { displayed, done } = useTypewriter(message.content, message.id)
+
   return (
     <div className="flex gap-3 items-start max-w-[80%]">
       <Avatar className="h-8 w-8 shrink-0">
@@ -36,7 +68,10 @@ function AIBubble({ message }: { message: TextMessage }) {
       <div className="flex flex-col gap-1">
         <p className="text-sm font-semibold">Agent Script</p>
         <div className="bg-white border rounded-2xl rounded-tl-none shadow-sm px-4 py-3">
-          <p className="text-sm leading-relaxed">{message.content}</p>
+          <p className="text-sm leading-relaxed">
+            {displayed}
+            {!done && <span className="inline-block w-0.5 h-4 bg-gray-400 align-middle ml-0.5 animate-pulse" />}
+          </p>
         </div>
       </div>
     </div>
@@ -57,6 +92,8 @@ function VABubble({ message }: { message: TextMessage }) {
 }
 
 function AIWidgetBubble({ message, children }: { message: ChatMessage; children: React.ReactNode }) {
+  const { displayed, done } = useTypewriter(message.content, message.id)
+
   return (
     <div className="flex gap-3 items-start max-w-[95%]">
       <Avatar className="h-8 w-8 shrink-0">
@@ -67,8 +104,11 @@ function AIWidgetBubble({ message, children }: { message: ChatMessage; children:
       <div className="flex flex-col gap-1">
         <p className="text-sm font-semibold">Agent Script</p>
         <div className="bg-white border rounded-2xl rounded-tl-none shadow-sm px-4 py-3">
-          <p className="text-sm leading-relaxed">{message.content}</p>
-          {children}
+          <p className="text-sm leading-relaxed">
+            {displayed}
+            {!done && <span className="inline-block w-0.5 h-4 bg-gray-400 align-middle ml-0.5 animate-pulse" />}
+          </p>
+          {done && children}
         </div>
       </div>
     </div>
@@ -149,6 +189,6 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
       )
     }
     default:
-      return <AIBubble message={message as TextMessage} />
+      return <AIBubble message={message as unknown as TextMessage} />
   }
 }
