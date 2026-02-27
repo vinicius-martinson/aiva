@@ -1,9 +1,9 @@
 import { useEffect } from "react"
-import { AppLayout } from "@/components/layout/AppLayout"
 import { ChatProvider, useChat } from "@/contexts/ChatContext"
 import { ChatHeader } from "@/components/chat/ChatHeader"
 import { MessageList } from "@/components/chat/MessageList"
 import { ChatInput } from "@/components/chat/ChatInput"
+import { ContextPanel } from "@/components/layout/ContextPanel"
 import { useSearchParams } from "@/hooks/useSearchParams"
 
 function ChatApp() {
@@ -25,14 +25,15 @@ function ChatApp() {
   )
 }
 
-function App() {
+export function ChatPage() {
   return (
     <ChatProvider>
-      <AppLayout>
-        <ChatApp />
-      </AppLayout>
+      <div className="grid grid-cols-[1fr_300px] h-full min-h-0">
+        <main className="flex flex-col min-w-0 min-h-0">
+          <ChatApp />
+        </main>
+        <ContextPanel />
+      </div>
     </ChatProvider>
   )
 }
-
-export default App

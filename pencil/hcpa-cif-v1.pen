@@ -6135,7 +6135,7 @@
                       "iconFontName": "settings"
                     },
                     "wawnU": {
-                      "content": "Settings"
+                      "content": "FAQs"
                     }
                   }
                 }
@@ -6589,6 +6589,8 @@
                             "thickness": 0
                           },
                           "layout": "vertical",
+                          "justifyContent": "start",
+                          "alignItems": "center",
                           "children": [
                             {
                               "id": "GPotF",
@@ -7022,6 +7024,8 @@
                           },
                           "layout": "vertical",
                           "gap": 0,
+                          "justifyContent": "start",
+                          "alignItems": "center",
                           "children": [
                             {
                               "type": "frame",
@@ -7420,6 +7424,635 @@
                         },
                         "XQCHD": {
                           "enabled": false
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "13woV",
+      "x": 1540,
+      "y": 5400,
+      "name": "FAQs",
+      "width": 1440,
+      "height": 900,
+      "fill": "$--background",
+      "children": [
+        {
+          "id": "EXRD2",
+          "type": "ref",
+          "ref": "k1Tgo",
+          "height": "fill_container",
+          "name": "sidebar",
+          "descendants": {
+            "8JXzO": {
+              "fill": "$--sidebar-primary"
+            },
+            "lSLqU": {
+              "content": "FieldPro"
+            },
+            "2c8Tk": {
+              "children": [
+                {
+                  "id": "Kgmr2",
+                  "type": "ref",
+                  "ref": "hZwCK",
+                  "name": "secMain",
+                  "descendants": {
+                    "ypbD4": {
+                      "content": "Main"
+                    }
+                  }
+                },
+                {
+                  "id": "vmWan",
+                  "type": "ref",
+                  "ref": "cpj5L",
+                  "name": "itemDash",
+                  "descendants": {
+                    "JTWa5": {
+                      "iconFontName": "layout-dashboard"
+                    },
+                    "wawnU": {
+                      "content": "Dashboard"
+                    }
+                  }
+                },
+                {
+                  "id": "5VVSk",
+                  "type": "ref",
+                  "ref": "cpj5L",
+                  "name": "itemChat",
+                  "descendants": {
+                    "JTWa5": {
+                      "iconFontName": "sparkles"
+                    },
+                    "wawnU": {
+                      "content": "AI Assistant"
+                    }
+                  }
+                },
+                {
+                  "id": "lkRFB",
+                  "type": "ref",
+                  "ref": "cpj5L",
+                  "name": "itemJobs",
+                  "descendants": {
+                    "JTWa5": {
+                      "iconFontName": "briefcase"
+                    },
+                    "wawnU": {
+                      "content": "Jobs"
+                    }
+                  }
+                },
+                {
+                  "id": "I56uO",
+                  "type": "ref",
+                  "ref": "cpj5L",
+                  "name": "itemSched",
+                  "descendants": {
+                    "JTWa5": {
+                      "iconFontName": "calendar"
+                    },
+                    "wawnU": {
+                      "content": "Schedule"
+                    }
+                  }
+                },
+                {
+                  "id": "7swG4",
+                  "type": "ref",
+                  "ref": "cpj5L",
+                  "name": "itemClients",
+                  "descendants": {
+                    "JTWa5": {
+                      "iconFontName": "users"
+                    },
+                    "wawnU": {
+                      "content": "Clients"
+                    }
+                  }
+                },
+                {
+                  "id": "6GecP",
+                  "type": "ref",
+                  "ref": "hZwCK",
+                  "name": "secMore",
+                  "descendants": {
+                    "ypbD4": {
+                      "content": "More"
+                    }
+                  }
+                },
+                {
+                  "id": "6Rr55",
+                  "type": "ref",
+                  "ref": "4jfFd",
+                  "name": "itemFAQs",
+                  "descendants": {
+                    "JTWa5": {
+                      "iconFontName": "circle-help"
+                    },
+                    "wawnU": {
+                      "content": "FAQs"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "udSdh",
+          "name": "Main Content",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "ogFYI",
+              "name": "Top Bar",
+              "width": "fill_container",
+              "height": 64,
+              "fill": "$--card",
+              "stroke": {
+                "align": "inside",
+                "thickness": {
+                  "bottom": 1
+                },
+                "fill": "$--border"
+              },
+              "padding": [
+                0,
+                32
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "5D8OZ",
+                  "name": "Top Left",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gAGC5",
+                      "name": "greetTitle",
+                      "fill": "$--foreground",
+                      "content": "FAQs",
+                      "fontFamily": "$--font-primary",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "df2xl",
+                      "name": "greetSub",
+                      "fill": "$--muted-foreground",
+                      "content": "Guides for taking messages and responding to calls",
+                      "fontFamily": "$--font-primary",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gLJKB",
+                  "name": "Top Right",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PeQNS",
+                      "name": "dateText",
+                      "fill": "$--muted-foreground",
+                      "content": "Thu, Feb 27, 2026",
+                      "fontFamily": "$--font-primary",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "icon_font",
+                      "id": "ya5Ew",
+                      "name": "bellIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "bell",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--muted-foreground"
+                    },
+                    {
+                      "id": "o8y8K",
+                      "type": "ref",
+                      "ref": "1OPV7",
+                      "name": "avatarFrame"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "KSJTd",
+              "name": "Body",
+              "clip": true,
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 32,
+              "padding": [
+                32,
+                48
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "98RWY",
+                  "name": "Page Header",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "zQNkw",
+                      "name": "headerTitle",
+                      "fill": "$--foreground",
+                      "content": "Frequently Asked Questions",
+                      "lineHeight": 1.3,
+                      "fontFamily": "$--font-primary",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fIO2z",
+                      "name": "headerDesc",
+                      "fill": "$--muted-foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Find answers about taking messages and responding to calls using the HCP Assist system.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "$--font-primary",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eGvTT",
+                  "name": "Take a Message Section",
+                  "width": "fill_container",
+                  "fill": "$--card",
+                  "cornerRadius": "$--radius-xs",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000d",
+                    "offset": {
+                      "x": 0,
+                      "y": 1
+                    },
+                    "blur": 1.75
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FNO9n",
+                      "name": "sec1Header",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "bottom": 1
+                        },
+                        "fill": "$--border"
+                      },
+                      "gap": 12,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "PPMhO",
+                          "name": "sec1Icon",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "message-square-text",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--primary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "RIPtD",
+                          "name": "sec1Title",
+                          "fill": "$--foreground",
+                          "content": "Taking a Message",
+                          "fontFamily": "Roboto",
+                          "fontSize": 18,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ZWHVb",
+                      "name": "Accordion List",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "id": "4rDkI",
+                          "type": "ref",
+                          "ref": "aSENS",
+                          "width": "fill_container",
+                          "name": "acc1",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "How do I take a message for a client?"
+                            },
+                            "NlDxQ": {
+                              "content": "When a call comes in, click the 'Take Message' button on the active call panel. Fill in the caller's name, phone number, and the message details. You can also select the urgency level (Normal, Urgent, or Emergency) before saving. The message will be automatically routed to the assigned HCP."
+                            }
+                          }
+                        },
+                        {
+                          "id": "bVwdX",
+                          "type": "ref",
+                          "ref": "XpAYs",
+                          "width": "fill_container",
+                          "name": "acc2",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "What information should I capture in a message?"
+                            }
+                          }
+                        },
+                        {
+                          "id": "UuqDc",
+                          "type": "ref",
+                          "ref": "XpAYs",
+                          "width": "fill_container",
+                          "name": "acc3",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "How do I set the urgency level for a message?"
+                            }
+                          }
+                        },
+                        {
+                          "id": "zGGAv",
+                          "type": "ref",
+                          "ref": "XpAYs",
+                          "width": "fill_container",
+                          "name": "acc4",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "Can I edit or delete a message after saving?"
+                            }
+                          }
+                        },
+                        {
+                          "id": "MrlPV",
+                          "type": "ref",
+                          "ref": "XpAYs",
+                          "width": "fill_container",
+                          "name": "acc5",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "How do I know if a message was delivered?"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eig7M",
+                  "name": "Respond to Calls Section",
+                  "width": "fill_container",
+                  "fill": "$--card",
+                  "cornerRadius": "$--radius-xs",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#0000000d",
+                    "offset": {
+                      "x": 0,
+                      "y": 1
+                    },
+                    "blur": 1.75
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Dei6k",
+                      "name": "sec2Header",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "bottom": 1
+                        },
+                        "fill": "$--border"
+                      },
+                      "gap": 12,
+                      "padding": [
+                        16,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "MhFdq",
+                          "name": "sec2Icon",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "phone-incoming",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--primary"
+                        },
+                        {
+                          "type": "text",
+                          "id": "BSxSx",
+                          "name": "sec2Title",
+                          "fill": "$--foreground",
+                          "content": "Responding to Calls",
+                          "fontFamily": "Roboto",
+                          "fontSize": 18,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "sCyaZ",
+                      "name": "Accordion List",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "id": "ekqMe",
+                          "type": "ref",
+                          "ref": "aSENS",
+                          "width": "fill_container",
+                          "name": "racc1",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "How do I answer an incoming call?"
+                            },
+                            "NlDxQ": {
+                              "content": "When an incoming call is detected, a notification banner will appear at the top of your screen. Click 'Answer' to connect. You'll see the caller's information (if available) and any associated client records. Use the call toolbar to mute, hold, or transfer the call as needed."
+                            }
+                          }
+                        },
+                        {
+                          "id": "2ANaO",
+                          "type": "ref",
+                          "ref": "XpAYs",
+                          "width": "fill_container",
+                          "name": "racc2",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "How do I transfer a call to another agent?"
+                            }
+                          }
+                        },
+                        {
+                          "id": "q2lPj",
+                          "type": "ref",
+                          "ref": "XpAYs",
+                          "width": "fill_container",
+                          "name": "racc3",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "What should I do if a call drops unexpectedly?"
+                            }
+                          }
+                        },
+                        {
+                          "id": "uGDD7",
+                          "type": "ref",
+                          "ref": "XpAYs",
+                          "width": "fill_container",
+                          "name": "racc4",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "How do I place a caller on hold?"
+                            }
+                          }
+                        },
+                        {
+                          "id": "ynW1x",
+                          "type": "ref",
+                          "ref": "XpAYs",
+                          "width": "fill_container",
+                          "name": "racc5",
+                          "descendants": {
+                            "2BrwF": {
+                              "content": "Can I make outbound calls from the system?"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2ZeJN",
+                  "name": "Need Help Banner",
+                  "width": "fill_container",
+                  "fill": "$--muted",
+                  "cornerRadius": "$--radius-xs",
+                  "padding": [
+                    20,
+                    24
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Sv0qT",
+                      "name": "helpLeft",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "ynBPe",
+                          "name": "helpIcon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "headset",
+                          "iconFontFamily": "lucide",
+                          "fill": "$--muted-foreground"
+                        },
+                        {
+                          "type": "text",
+                          "id": "03roI",
+                          "name": "helpText",
+                          "fill": "$--muted-foreground",
+                          "content": "Still have questions? Contact support for assistance.",
+                          "fontFamily": "Roboto",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "zyBPf",
+                      "type": "ref",
+                      "ref": "bf6GF",
+                      "name": "helpBtn",
+                      "descendants": {
+                        "RBuHZ": {
+                          "enabled": false
+                        },
+                        "MBpWS": {
+                          "content": "Contact Support"
                         }
                       }
                     }

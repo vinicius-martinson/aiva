@@ -22,14 +22,8 @@ export function Sidebar() {
       <nav className="flex-1 px-3 overflow-y-auto">
         <NavGroup label="Main">
           <NavItem icon={LayoutDashboard} label="Dashboard" href="/dashboard" />
-          <NavItem icon={Sparkles} label="Agent Script" href="/ai-assistant" active />
+          <NavItem icon={Sparkles} label="Agent Script" href="/ai-assistant" />
         </NavGroup>
-
-        <div className="space-y-1 mb-4">
-          <NavItem icon={Briefcase} label="Jobs" href="/jobs" />
-          <NavItem icon={Calendar} label="Schedule" href="/schedule" />
-          <NavItem icon={Users} label="Clients" href="/clients" />
-        </div>
 
         <NavGroup label="More">
           <NavItem icon={HelpCircle} label="FAQs" href="/settings" />
