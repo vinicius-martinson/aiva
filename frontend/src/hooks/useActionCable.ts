@@ -77,6 +77,8 @@ export function useActionCable(options: UseActionCableOptions) {
           pendingChunksRef.current[data.seq] = data.text
           drainChunks()
         } else if (data.type === "agent_turn_complete") {
+          // Drain any remaining pending chunks before finalizing
+          drainChunks()
           nextSeqRef.current = 1
           pendingChunksRef.current = {}
           optionsRef.current.onAgentTurnComplete?.(data as AgentTurnCompleteData)

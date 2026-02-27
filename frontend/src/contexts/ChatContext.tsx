@@ -21,7 +21,7 @@ type ChatAction =
   | { type: "ADD_MESSAGE"; payload: ChatMessage }
   | { type: "CLEAR_MESSAGES" }
   | { type: "APPEND_STREAMING_TEXT"; payload: string }
-  | { type: "FINALIZE_STREAMING_TEXT" }
+  | { type: "FINALIZE_STREAMING_TEXT"; payload?: string }
   | { type: "ADD_TOOL_RESULTS"; payload: ToolCallResult[] }
   | { type: "SET_CONNECTION_STATUS"; payload: ConnectionStatus }
   | { type: "SET_RECORDING"; payload: boolean }
@@ -65,12 +65,15 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
 
     case "FINALIZE_STREAMING_TEXT": {
       const newMessages = [...state.messages]
-      if (state.streamingText) {
+      // Use authoritative text from backend (agent_script) if available,
+      // fall back to accumulated streaming text
+      const content = action.payload || state.streamingText
+      if (content) {
         newMessages.push({
           id: crypto.randomUUID(),
           role: "assistant",
           type: "text",
-          content: state.streamingText,
+          content,
           timestamp: new Date()
         })
       }
@@ -205,7 +208,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       dispatch({ type: "APPEND_STREAMING_TEXT", payload: text })
     },
     onAgentTurnComplete: (data) => {
-      dispatch({ type: "FINALIZE_STREAMING_TEXT" })
+      dispatch({ type: "FINALIZE_STREAMING_TEXT", payload: data.agent_script ?? undefined })
       if (data.tool_calls && data.tool_calls.length > 0) {
         dispatch({ type: "ADD_TOOL_RESULTS", payload: data.tool_calls })
       }
