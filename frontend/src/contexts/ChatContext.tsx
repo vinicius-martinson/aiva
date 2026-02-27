@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer, useEffect, type ReactNode } from "react"
+import { flushSync } from "react-dom"
 import type { ChatMessage, ToolCallResult } from "@/types/chat"
 import { useActionCable } from "@/hooks/useActionCable"
 
@@ -30,6 +31,7 @@ type ChatAction =
   | { type: "SET_SESSION_UUID"; payload: string }
   | { type: "SET_CLIENT_NAME"; payload: string }
   | { type: "SET_INTERIM_TRANSCRIPT"; payload: string }
+  | { type: "SET_AGENT_STREAMING"; payload: boolean }
 
 const initialState: ChatState = {
   messages: [],
@@ -184,6 +186,9 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
     case "SET_INTERIM_TRANSCRIPT":
       return { ...state, interimTranscript: action.payload }
 
+    case "SET_AGENT_STREAMING":
+      return { ...state, isAgentStreaming: action.payload }
+
     default:
       return state
   }
@@ -204,8 +209,13 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(chatReducer, initialState)
 
   const { sendText, startRecording, stopRecording, isRecording, connectionStatus, reconnect } = useActionCable({
+    onAgentThinking: () => {
+      dispatch({ type: "SET_AGENT_STREAMING", payload: true })
+    },
     onAgentTextDelta: (text) => {
-      dispatch({ type: "APPEND_STREAMING_TEXT", payload: text })
+      flushSync(() => {
+        dispatch({ type: "APPEND_STREAMING_TEXT", payload: text })
+      })
     },
     onAgentTurnComplete: (data) => {
       dispatch({ type: "FINALIZE_STREAMING_TEXT", payload: data.agent_script ?? undefined })

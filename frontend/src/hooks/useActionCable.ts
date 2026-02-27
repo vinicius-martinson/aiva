@@ -18,6 +18,7 @@ type UseActionCableOptions = {
   onTranscription?: (transcript: string, isFinal: boolean) => void
   onAgentTextDelta?: (text: string) => void
   onAgentTurnComplete?: (data: AgentTurnCompleteData) => void
+  onAgentThinking?: () => void
 }
 
 // Singleton cable instance
@@ -82,6 +83,8 @@ export function useActionCable(options: UseActionCableOptions) {
           nextSeqRef.current = 1
           pendingChunksRef.current = {}
           optionsRef.current.onAgentTurnComplete?.(data as AgentTurnCompleteData)
+        } else if (data.type === "agent_thinking") {
+          optionsRef.current.onAgentThinking?.()
         } else if (data.type === "transcription") {
           optionsRef.current.onTranscription?.(data.transcript, data.is_final)
         }

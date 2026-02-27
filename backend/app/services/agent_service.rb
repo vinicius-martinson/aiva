@@ -44,6 +44,7 @@ class AgentService
   def chat(text)
     puts "[AGENT] User: #{text}"
     @messages << { role: "user", content: text }
+    broadcast({ type: "agent_thinking", timestamp: Time.current.iso8601 })
 
     iterations = 0
 
