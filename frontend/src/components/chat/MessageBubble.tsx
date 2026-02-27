@@ -1,6 +1,7 @@
-import type { ChatMessage, TextMessage, ScheduleTypeMessage, BookingSummaryMessage, UpsellMessage } from "@/types/chat"
+import type { ChatMessage, TextMessage, ClassifyVisitMessage, ScheduleTypeMessage, BookingSummaryMessage, UpsellMessage } from "@/types/chat"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Sparkles } from "lucide-react"
+import { ClassifyVisitWidget } from "@/components/widgets/ClassifyVisitWidget"
 import { ScheduleTypeWidget } from "@/components/widgets/ScheduleTypeWidget"
 import { BookingSummaryWidget } from "@/components/widgets/BookingSummaryWidget"
 import { UpsellWidget } from "@/components/widgets/UpsellWidget"
@@ -56,7 +57,7 @@ function VABubble({ message }: { message: TextMessage }) {
 
 function AIWidgetBubble({ message, children }: { message: ChatMessage; children: React.ReactNode }) {
   return (
-    <div className="flex gap-3 items-start max-w-[85%]">
+    <div className="flex gap-3 items-start max-w-[95%]">
       <Avatar className="h-8 w-8 shrink-0">
         <AvatarFallback className="bg-purple-500 text-white">
           <Sparkles className="h-4 w-4" />
@@ -85,6 +86,19 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
   switch (message.type) {
     case "text":
       return <AIBubble message={message} />
+    case "widget:classify_visit": {
+      const classifyMsg = message as ClassifyVisitMessage
+      return (
+        <AIWidgetBubble message={message}>
+          <ClassifyVisitWidget
+            visitType={classifyMsg.data.visit_type}
+            issueSummary={classifyMsg.data.issue_summary}
+            urgency={classifyMsg.data.urgency}
+            reason={classifyMsg.data.reason}
+          />
+        </AIWidgetBubble>
+      )
+    }
     case "widget:schedule_type": {
       const schedMsg = message as ScheduleTypeMessage
       return (

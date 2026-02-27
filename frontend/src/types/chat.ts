@@ -8,6 +8,20 @@ export type TextMessage = {
   timestamp: Date
 }
 
+export type ClassifyVisitMessage = {
+  id: string
+  role: "assistant"
+  type: "widget:classify_visit"
+  content: string
+  timestamp: Date
+  data: {
+    visit_type: string
+    issue_summary: string
+    urgency: string
+    reason: string
+  }
+}
+
 // Phase 2+ widget types — defined now for forward compatibility
 export type ScheduleTypeMessage = {
   id: string
@@ -59,4 +73,4 @@ export type ToolCallResult = {
 }
 
 // Discriminated union — switch on message.type for type-safe rendering
-export type ChatMessage = TextMessage | ScheduleTypeMessage | BookingSummaryMessage | UpsellMessage
+export type ChatMessage = TextMessage | ClassifyVisitMessage | ScheduleTypeMessage | BookingSummaryMessage | UpsellMessage

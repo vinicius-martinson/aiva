@@ -92,6 +92,30 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
       let newMessages = [...state.messages]
 
       for (const tc of action.payload) {
+        if (tc.tool_name === "classify_visit_type") {
+          const result = tc.result as {
+            visit_type?: string
+            issue_summary?: string
+            urgency?: string
+            reason?: string
+          }
+          if (result.visit_type) {
+            newMessages.push({
+              id: crypto.randomUUID(),
+              role: "assistant",
+              type: "widget:classify_visit",
+              content: "Issue classified",
+              timestamp: new Date(),
+              data: {
+                visit_type: result.visit_type ?? "",
+                issue_summary: result.issue_summary ?? "",
+                urgency: result.urgency ?? "medium",
+                reason: result.reason ?? ""
+              }
+            })
+          }
+        }
+
         if (tc.tool_name === "select_schedule_type") {
           const result = tc.result as { options?: Array<{ id: string; label: string; description: string }> }
           if (result.options) {

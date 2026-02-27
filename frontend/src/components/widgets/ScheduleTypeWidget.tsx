@@ -31,8 +31,8 @@ export function ScheduleTypeWidget({ messageId, options, locked }: ScheduleTypeW
   }
 
   return (
-    <div className="mt-3 space-y-3">
-      <div className="flex gap-2">
+    <div className="mt-3 space-y-4">
+      <div className="grid grid-cols-3 gap-3">
         {options.map((option) => {
           const Icon = iconMap[option.id] || Calendar
           const isSelected = selected === option.id
@@ -42,16 +42,24 @@ export function ScheduleTypeWidget({ messageId, options, locked }: ScheduleTypeW
               key={option.id}
               onClick={() => !locked && setSelected(option.id)}
               className={cn(
-                "relative flex flex-1 flex-col items-center gap-2 rounded-lg border-2 p-3 transition-all",
+                "relative flex flex-col items-center gap-3 rounded-xl border-2 px-4 py-5 transition-all",
                 isSelected
-                  ? "border-purple-500 bg-purple-50"
-                  : "border-gray-200 hover:bg-gray-50",
+                  ? "border-purple-500 bg-purple-50 shadow-sm"
+                  : "border-gray-200 hover:border-gray-300 hover:bg-gray-50",
                 locked && "pointer-events-none cursor-not-allowed opacity-60"
               )}
               disabled={locked}
             >
-              <Icon className="h-5 w-5 text-gray-700" />
-              <span className="text-sm font-medium text-gray-900">{option.label}</span>
+              <div className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full",
+                isSelected ? "bg-purple-100" : "bg-gray-100"
+              )}>
+                <Icon className={cn("h-5 w-5", isSelected ? "text-purple-600" : "text-gray-600")} />
+              </div>
+              <div className="text-center">
+                <span className="text-sm font-semibold text-gray-900 block">{option.label}</span>
+                <span className="text-xs text-gray-500 mt-1 block">{option.description}</span>
+              </div>
 
               {isSelected && (
                 <div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-purple-500">
