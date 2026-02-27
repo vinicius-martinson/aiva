@@ -35,7 +35,7 @@ export function MessageList() {
               </AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-semibold">AI Assistant</p>
+              <p className="text-sm font-semibold">Agent Script</p>
               <div className="bg-white border rounded-2xl rounded-tl-none shadow-sm px-4 py-3">
                 <p className="text-sm leading-relaxed">{state.streamingText}</p>
               </div>
