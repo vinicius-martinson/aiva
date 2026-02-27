@@ -28,7 +28,7 @@ function AIBubble({ message }: { message: TextMessage }) {
   return (
     <div className="flex gap-3 items-start max-w-[80%]">
       <Avatar className="h-8 w-8 shrink-0">
-        <AvatarFallback className="bg-purple-500 text-white">
+        <AvatarFallback className="bg-blue-500 text-white">
           <Sparkles className="h-4 w-4" />
         </AvatarFallback>
       </Avatar>
@@ -45,7 +45,7 @@ function AIBubble({ message }: { message: TextMessage }) {
 function VABubble({ message }: { message: TextMessage }) {
   return (
     <div className="flex flex-col gap-1 items-end">
-      <div className="bg-purple-500 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-[70%]">
+      <div className="bg-blue-500 text-white rounded-2xl rounded-tr-none px-4 py-3 max-w-[70%]">
         <p className="text-sm leading-relaxed">{message.content}</p>
       </div>
       <p className="text-xs text-muted-foreground">
@@ -59,7 +59,7 @@ function AIWidgetBubble({ message, children }: { message: ChatMessage; children:
   return (
     <div className="flex gap-3 items-start max-w-[95%]">
       <Avatar className="h-8 w-8 shrink-0">
-        <AvatarFallback className="bg-purple-500 text-white">
+        <AvatarFallback className="bg-blue-500 text-white">
           <Sparkles className="h-4 w-4" />
         </AvatarFallback>
       </Avatar>

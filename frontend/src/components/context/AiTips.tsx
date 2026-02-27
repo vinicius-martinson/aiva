@@ -39,7 +39,7 @@ export function AiTips() {
           <span className="text-xs font-semibold text-amber-700">Long Call Duration</span>
         </div>
         <p className="text-[11px] leading-relaxed text-amber-700">
-          This call is exceeding the average duration of 2:30 for IB_HCPA_Staging queue. Consider summarizing the key points and moving toward resolution.
+          This call is exceeding the average duration of 1 minute for IB_HCPA_Staging queue. Consider summarizing the key points and moving toward resolution.
         </p>
       </div>
     </div>

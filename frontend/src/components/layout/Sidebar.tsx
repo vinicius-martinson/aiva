@@ -18,7 +18,7 @@ export function Sidebar() {
       <nav className="flex-1 px-3 overflow-y-auto">
         <NavGroup label="Main">
           <NavItem icon={LayoutDashboard} label="Dashboard" href="/dashboard" />
-          <NavItem icon={Sparkles} label="Agent Script" href="/ai-assistant" />
+          <NavItem icon={Sparkles} label="Incoming Call" href="/ai-assistant" />
         </NavGroup>
 
         <NavGroup label="More">

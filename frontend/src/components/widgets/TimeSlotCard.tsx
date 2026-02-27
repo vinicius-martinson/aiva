@@ -16,7 +16,7 @@ export function TimeSlotCard({ slot, selected, disabled, onSelect }: TimeSlotCar
       className={cn(
         "relative w-full rounded-lg border-2 p-3 text-left transition-all",
         selected
-          ? "border-purple-500 bg-purple-50"
+          ? "border-blue-600 bg-blue-50"
           : "border-gray-200 hover:bg-gray-50",
         disabled && "cursor-not-allowed opacity-60",
         !slot.available && "bg-gray-50"
@@ -31,7 +31,7 @@ export function TimeSlotCard({ slot, selected, disabled, onSelect }: TimeSlotCar
         </div>
 
         {selected && (
-          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500">
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600">
             <Check className="h-4 w-4 text-white" />
           </div>
         )}

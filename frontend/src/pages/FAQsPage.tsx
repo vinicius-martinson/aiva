@@ -5,6 +5,7 @@ import {
   ChevronUp,
   ChevronDown,
   Headset,
+  HelpCircle,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { faqSections, type FAQSection, type FAQItem } from "@/data/faqsMockData"
@@ -80,12 +81,10 @@ export function FAQsPage() {
   return (
     <div className="flex flex-col h-full min-h-0">
       {/* Top bar */}
-      <div className="flex items-center justify-between px-8 h-16 border-b bg-card shrink-0">
-        <div className="space-y-0.5">
-          <h1 className="text-lg font-semibold text-foreground">FAQs</h1>
-          <p className="text-[13px] text-muted-foreground">
-            Guides for taking messages and responding to calls
-          </p>
+      <div className="flex items-center justify-between px-6 h-16 border-b bg-card shrink-0">
+        <div className="flex items-center gap-3">
+          <HelpCircle className="h-5 w-5 text-blue-600" />
+          <h2 className="text-lg font-semibold text-foreground">FAQs</h2> 
         </div>
       </div>
 

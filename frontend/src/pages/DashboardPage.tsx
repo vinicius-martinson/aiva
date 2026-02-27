@@ -170,8 +170,8 @@ export function DashboardPage() {
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
             showInsights
-              ? "bg-purple-100 text-purple-700 ring-1 ring-purple-300"
-              : "bg-white text-gray-700 ring-1 ring-gray-200 hover:ring-purple-300 hover:text-purple-700"
+              ? "bg-blue-100 text-blue-700 ring-1 ring-blue-300"
+              : "bg-white text-gray-700 ring-1 ring-gray-200 hover:ring-blue-300 hover:text-blue-700"
           )}
         >
           <Sparkles className="h-4 w-4" />

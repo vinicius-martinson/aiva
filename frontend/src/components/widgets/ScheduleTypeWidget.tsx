@@ -44,8 +44,8 @@ export function ScheduleTypeWidget({ messageId, options, locked }: ScheduleTypeW
               className={cn(
                 "relative flex flex-col items-center gap-3 rounded-xl border-2 px-4 py-5 transition-all",
                 isSelected
-                  ? "border-purple-500 bg-purple-50 shadow-sm"
-                  : "border-gray-200 hover:border-gray-300 hover:bg-gray-50",
+                  ? "border-blue-600 bg-blue-50"
+                  : "border-gray-200 hover:bg-gray-50",
                 locked && "pointer-events-none cursor-not-allowed opacity-60"
               )}
               disabled={locked}
@@ -62,7 +62,7 @@ export function ScheduleTypeWidget({ messageId, options, locked }: ScheduleTypeW
               </div>
 
               {isSelected && (
-                <div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-purple-500">
+                <div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600">
                   <Check className="h-3 w-3 text-white" />
                 </div>
               )}

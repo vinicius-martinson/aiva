@@ -74,7 +74,7 @@ export function ChatInput() {
         </button>
         <Button
           size="icon"
-          className="rounded-full bg-purple-500 hover:bg-purple-600 h-8 w-8 shrink-0"
+          className="rounded-full bg-blue-600 hover:bg-blue-700 h-8 w-8 shrink-0"
           onClick={handleSend}
           disabled={!input.trim() || state.isAgentStreaming}
           aria-label="Send message"
