@@ -38,10 +38,23 @@ export function useActionCable(options: UseActionCableOptions) {
   const streamRef = useRef<MediaStream | null>(null)
   const optionsRef = useRef(options)
 
+  // Sequence-based chunk reordering
+  const nextSeqRef = useRef(1)
+  const pendingChunksRef = useRef<Record<number, string>>({})
+
   // Keep options ref current
   useEffect(() => {
     optionsRef.current = options
   }, [options])
+
+  const drainChunks = useCallback(() => {
+    while (pendingChunksRef.current[nextSeqRef.current] !== undefined) {
+      const chunk = pendingChunksRef.current[nextSeqRef.current]
+      delete pendingChunksRef.current[nextSeqRef.current]
+      nextSeqRef.current += 1
+      optionsRef.current.onAgentTextDelta?.(chunk)
+    }
+  }, [])
 
   const subscribe = useCallback(() => {
     // Cleanup existing subscription
@@ -61,8 +74,11 @@ export function useActionCable(options: UseActionCableOptions) {
       },
       received(data: any) {
         if (data.type === "agent_text_delta") {
-          optionsRef.current.onAgentTextDelta?.(data.text)
+          pendingChunksRef.current[data.seq] = data.text
+          drainChunks()
         } else if (data.type === "agent_turn_complete") {
+          nextSeqRef.current = 1
+          pendingChunksRef.current = {}
           optionsRef.current.onAgentTurnComplete?.(data as AgentTurnCompleteData)
         } else if (data.type === "transcription") {
           optionsRef.current.onTranscription?.(data.transcript, data.is_final)

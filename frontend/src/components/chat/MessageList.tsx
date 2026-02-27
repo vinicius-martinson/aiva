@@ -12,7 +12,7 @@ export function MessageList() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [state.messages, state.streamingText])
+  }, [state.messages, state.streamingText, state.interimTranscript])
 
   return (
     <div className="flex-1 overflow-y-auto p-6">
@@ -43,6 +43,13 @@ export function MessageList() {
           </div>
         )}
         {state.isAgentStreaming && !state.streamingText && <TypingIndicator />}
+        {state.interimTranscript && (
+          <div className="flex justify-end">
+            <div className="bg-blue-100 border border-blue-200 rounded-2xl rounded-tr-none px-4 py-3 max-w-[80%]">
+              <p className="text-sm italic text-blue-400 leading-relaxed">{state.interimTranscript}</p>
+            </div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
     </div>

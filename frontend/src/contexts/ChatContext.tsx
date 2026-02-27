@@ -14,6 +14,7 @@ type ChatState = {
   quickActionsUsed: boolean
   sessionUuid: string | null
   clientName: string | null
+  interimTranscript: string
 }
 
 type ChatAction =
@@ -28,6 +29,7 @@ type ChatAction =
   | { type: "LOCK_MESSAGE"; payload: { messageId: string } }
   | { type: "SET_SESSION_UUID"; payload: string }
   | { type: "SET_CLIENT_NAME"; payload: string }
+  | { type: "SET_INTERIM_TRANSCRIPT"; payload: string }
 
 const initialState: ChatState = {
   messages: [],
@@ -38,7 +40,8 @@ const initialState: ChatState = {
   isRecording: false,
   quickActionsUsed: false,
   sessionUuid: null,
-  clientName: null
+  clientName: null,
+  interimTranscript: ""
 }
 
 function chatReducer(state: ChatState, action: ChatAction): ChatState {
@@ -175,6 +178,9 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
     case "SET_CLIENT_NAME":
       return { ...state, clientName: action.payload }
 
+    case "SET_INTERIM_TRANSCRIPT":
+      return { ...state, interimTranscript: action.payload }
+
     default:
       return state
   }
@@ -210,12 +216,15 @@ export function ChatProvider({ children }: { children: ReactNode }) {
           type: "ADD_MESSAGE",
           payload: {
             id: crypto.randomUUID(),
-            role: "system",
+            role: "user",
             type: "text",
             content: transcript,
             timestamp: new Date()
           }
         })
+        dispatch({ type: "SET_INTERIM_TRANSCRIPT", payload: "" })
+      } else {
+        dispatch({ type: "SET_INTERIM_TRANSCRIPT", payload: transcript })
       }
     }
   })
