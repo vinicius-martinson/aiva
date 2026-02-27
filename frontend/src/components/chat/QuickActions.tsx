@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Calendar, FileText, CalendarDays } from "lucide-react"
 import { useChat } from "@/contexts/ChatContext"
-import { FlowState } from "@/types/booking"
-import { getAIResponse } from "@/lib/mockEngine"
 
 const actions = [
   { id: "schedule_job", label: "Schedule a Job", icon: Calendar },
@@ -11,10 +9,9 @@ const actions = [
 ] as const
 
 export function QuickActions() {
-  const { state, dispatch } = useChat()
+  const { dispatch, sendText } = useChat()
 
   const handleAction = (label: string) => {
-    // Send as VA message in the chat
     dispatch({
       type: "ADD_MESSAGE",
       payload: {
@@ -26,26 +23,8 @@ export function QuickActions() {
       }
     })
 
-    // Mark quick actions as used (buttons disappear)
     dispatch({ type: "USE_QUICK_ACTION" })
-
-    // Show typing indicator
-    dispatch({ type: "SET_TYPING", payload: true })
-
-    // Quick actions skip IDLE classification and go straight to CLASSIFYING
-    // to produce the schedule type widget in one step
-    const response = getAIResponse(FlowState.CLASSIFYING, label, state.bookingData)
-
-    // Simulate typing delay then show response
-    setTimeout(() => {
-      dispatch({ type: "SET_TYPING", payload: false })
-      dispatch({ type: "ADD_MESSAGE", payload: response.message })
-      dispatch({
-        type: "TRANSITION_STATE",
-        payload: { nextState: response.nextState, data: response.data }
-      })
-    // eslint-disable-next-line react-hooks/purity
-    }, Math.floor(Math.random() * 400) + 600)
+    sendText(label)
   }
 
   return (

@@ -1,65 +1,16 @@
-import { useState, useCallback, useEffect, type KeyboardEvent } from "react"
+import { useState, type KeyboardEvent } from "react"
 import { Paperclip, Mic, ArrowUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useChat } from "@/contexts/ChatContext"
-import { getAIResponse } from "@/lib/mockEngine"
-import { useTranscript } from "@/hooks/useTranscript"
-import { FlowState } from "@/types/booking"
 
 export function ChatInput() {
-  const { state, dispatch } = useChat()
+  const { state, dispatch, sendText, startRecording, stopRecording } = useChat()
   const [input, setInput] = useState("")
-  const [isListening, setIsListening] = useState(false)
 
-  // Handle transcript chunk injection
-  const handleChunk = useCallback((text: string) => {
-    dispatch({
-      type: "ADD_MESSAGE",
-      payload: {
-        id: crypto.randomUUID(),
-        role: "system",
-        type: "text",
-        content: text,
-        timestamp: new Date(),
-      },
-    })
-  }, [dispatch])
-
-  // Handle transcript completion (triggers AI classifying)
-  const handleTranscriptComplete = useCallback(() => {
-    setIsListening(false)
-
-    // Show typing indicator
-    dispatch({ type: "SET_TYPING", payload: true })
-
-    // Random delay 600-1000ms for typing effect
-    const delay = Math.floor(Math.random() * 400) + 600
-    setTimeout(() => {
-      dispatch({ type: "SET_TYPING", payload: false })
-      dispatch({
-        type: "TRANSITION_STATE",
-        payload: {
-          nextState: FlowState.CLASSIFYING,
-        },
-      })
-    }, delay)
-  }, [dispatch])
-
-  // Initialize transcript hook
-  useTranscript(isListening, handleChunk, handleTranscriptComplete)
-
-  // Reset listening state when messages are cleared (New Chat)
-  useEffect(() => {
-    if (state.messages.length === 0 && isListening) {
-      setIsListening(false)
-    }
-  }, [state.messages.length, isListening])
-
-  const handleSend = async () => {
+  const handleSend = () => {
     const trimmed = input.trim()
     if (!trimmed) return
 
-    // Add VA message
     dispatch({
       type: "ADD_MESSAGE",
       payload: {
@@ -67,45 +18,12 @@ export function ChatInput() {
         role: "user",
         type: "text",
         content: trimmed,
-        timestamp: new Date(),
-      },
+        timestamp: new Date()
+      }
     })
 
     setInput("")
-
-    // Show typing indicator
-    dispatch({ type: "SET_TYPING", payload: true })
-
-    // Random delay 600-1000ms for typing effect
-    await new Promise(r => setTimeout(r, Math.floor(Math.random() * 400) + 600))
-
-    // Hide typing indicator
-    dispatch({ type: "SET_TYPING", payload: false })
-
-    // Get AI response from mock engine (pass clientName for context-aware responses)
-    const response = getAIResponse(
-      state.flowState,
-      trimmed,
-      state.bookingData,
-      state.clientName ?? undefined
-    )
-
-    // Add AI response message
-    dispatch({
-      type: "ADD_MESSAGE",
-      payload: response.message,
-    })
-
-    // Transition state if needed
-    if (response.nextState !== state.flowState) {
-      dispatch({
-        type: "TRANSITION_STATE",
-        payload: {
-          nextState: response.nextState,
-          data: response.data,
-        },
-      })
-    }
+    sendText(trimmed)
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -113,7 +31,14 @@ export function ChatInput() {
       e.preventDefault()
       handleSend()
     }
-    // Shift+Enter naturally inserts newline in textarea
+  }
+
+  const handleMicToggle = () => {
+    if (state.isRecording) {
+      stopRecording()
+    } else {
+      startRecording()
+    }
   }
 
   return (
@@ -133,25 +58,25 @@ export function ChatInput() {
           placeholder="Type a message or ask me anything..."
           rows={1}
           className="flex-1 outline-none text-sm resize-none bg-transparent py-1 max-h-32 leading-relaxed"
-          disabled={state.isTyping}
+          disabled={state.isAgentStreaming}
         />
         <button
-          onClick={() => setIsListening(!isListening)}
+          onClick={handleMicToggle}
           className={`p-1.5 transition-colors shrink-0 ${
-            isListening
+            state.isRecording
               ? "text-red-500"
               : "text-gray-400 hover:text-gray-600"
           }`}
-          aria-label={isListening ? "Stop listening" : "Start listening"}
+          aria-label={state.isRecording ? "Stop listening" : "Start listening"}
           type="button"
         >
-          <Mic className={`h-4 w-4 ${isListening ? "fill-current animate-pulse" : ""}`} />
+          <Mic className={`h-4 w-4 ${state.isRecording ? "fill-current animate-pulse" : ""}`} />
         </button>
         <Button
           size="icon"
           className="rounded-full bg-blue-600 hover:bg-blue-700 h-8 w-8 shrink-0"
           onClick={handleSend}
-          disabled={!input.trim() || state.isTyping}
+          disabled={!input.trim() || state.isAgentStreaming}
           aria-label="Send message"
         >
           <ArrowUp className="h-4 w-4" />

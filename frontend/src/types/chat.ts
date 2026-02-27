@@ -29,10 +29,18 @@ export type BookingSummaryMessage = {
   timestamp: Date
   data: {
     client: { name: string; phone: string; address: string }
-    timeSlots: Array<{ id: string; datetime: string; duration: string }>
+    availability: Array<{ slot: string; available: boolean }>
     scheduleType: string
+    pricingInfo?: { label: string; price_formatted: string; duration_hours: number }
     locked?: boolean
   }
+}
+
+export type ToolCallResult = {
+  tool_name: string
+  tool_use_id: string
+  input: Record<string, unknown>
+  result: Record<string, unknown>
 }
 
 // Discriminated union — switch on message.type for type-safe rendering

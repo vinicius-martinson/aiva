@@ -4,10 +4,11 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { useChat } from "@/contexts/ChatContext"
 
 export function ChatHeader() {
-  const { dispatch } = useChat()
+  const { dispatch, reconnect } = useChat()
 
   const handleNewChat = () => {
     dispatch({ type: "CLEAR_MESSAGES" })
+    reconnect()
   }
 
   return (

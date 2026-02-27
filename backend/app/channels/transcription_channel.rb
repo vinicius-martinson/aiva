@@ -6,14 +6,24 @@ class TranscriptionChannel < ApplicationCable::Channel
     @agent = AgentService.new("transcription_#{identifier_key}")
     @agent_processing = false
     @whisper_ws = connect_to_whisper
+
+    Thread.new do
+      sleep 0.5 # brief delay for subscription to establish
+      puts "[AGENT] Sending auto-greeting"
+      @agent.chat("New call started. Please greet the customer.")
+    rescue => e
+      puts "[AGENT] Greeting error: #{e.message}"
+    end
   end
 
   def receive(data)
-    return unless @whisper_ws
-
-    audio_data = Base64.decode64(data["audio"])
-    puts "[AUDIO] Received chunk: #{audio_data.bytesize} bytes"
-    @whisper_ws.send(audio_data, type: :binary)
+    if data["text"]
+      handle_text_message(data["text"])
+    elsif data["audio"] && @whisper_ws
+      audio_data = Base64.decode64(data["audio"])
+      puts "[AUDIO] Received chunk: #{audio_data.bytesize} bytes"
+      @whisper_ws.send(audio_data, type: :binary)
+    end
   end
 
   def unsubscribed
@@ -26,6 +36,25 @@ class TranscriptionChannel < ApplicationCable::Channel
 
   def identifier_key
     @identifier_key ||= SecureRandom.hex(8)
+  end
+
+  def handle_text_message(text)
+    return unless @agent && text.present?
+
+    if @agent_processing
+      puts "[AGENT] Skipping — agent is busy"
+      return
+    end
+
+    @agent_processing = true
+    Thread.new(text) do |msg|
+      puts "[AGENT] Processing text message: #{msg}"
+      @agent.chat(msg)
+    rescue => e
+      puts "[AGENT] Error: #{e.message}"
+    ensure
+      @agent_processing = false
+    end
   end
 
   def connect_to_whisper
@@ -89,5 +118,8 @@ class TranscriptionChannel < ApplicationCable::Channel
     end
 
     ws
+  rescue => e
+    Rails.logger.warn("Whisper connection failed: #{e.message} — running in text-only mode")
+    nil
   end
 end

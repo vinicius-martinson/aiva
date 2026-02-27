@@ -2,7 +2,8 @@ class AgentService
   MAX_ITERATIONS = 10
 
   TOOL_MODULES = {
-    "classify_visit_type"   => Tools::ClassifyVisitType,
+    "classify_visit_type"    => Tools::ClassifyVisitType,
+    "select_schedule_type"   => Tools::SelectScheduleType,
     "collect_customer_info"  => Tools::CollectCustomerInfo,
     "validate_address"       => Tools::ValidateAddress,
     "fetch_service_pricing"  => Tools::FetchServicePricing,
@@ -17,12 +18,13 @@ class AgentService
     You guide the customer through a structured call flow. Follow these steps IN ORDER — do not skip or combine steps:
 
     1. **Identify the issue**: Listen to the customer's problem. Once you understand the issue, call `classify_visit_type` with an issue summary and urgency level.
-    2. **Collect customer info**: Ask the customer for their full name and address. Once they provide it, call `collect_customer_info`.
-    3. **Validate address**: Immediately after collecting info, call `validate_address` with the customer's address to confirm service area coverage.
-    4. **Fetch pricing**: After address validation, call `fetch_service_pricing` with the appropriate service type to get pricing and availability.
-    5. **Present pricing and confirm**: Share the price, duration, and available time slots with the customer. Ask them to pick a time slot.
-    6. **Confirm booking**: Once the customer selects a time slot, call `confirm_booking` with the service details. After confirmation, respond with something like "Great, I have you on the schedule for [time slot]!" to let the customer know their appointment is locked in.
-    7. **Upsell**: After confirming the booking, call `offer_upsell` with the primary service type. Present the offer naturally, then wrap up the call.
+    2. **Select schedule type**: After classifying the visit, call `select_schedule_type` with options for Job (id: job, description: Schedule service work), Estimate (id: estimate, description: Get a quote), and Notes Only (id: notes_only, description: Save call notes) to let the customer choose their preferred scheduling type.
+    3. **Collect customer info**: Ask the customer for their full name and address. Once they provide it, call `collect_customer_info`.
+    4. **Validate address**: Immediately after collecting info, call `validate_address` with the customer's address to confirm service area coverage.
+    5. **Fetch pricing**: After address validation, call `fetch_service_pricing` with the appropriate service type to get pricing and availability.
+    6. **Present pricing and confirm**: Share the price, duration, and available time slots with the customer. Ask them to pick a time slot.
+    7. **Confirm booking**: Once the customer selects a time slot, call `confirm_booking` with the service details. After confirmation, respond with something like "Great, I have you on the schedule for [time slot]!" to let the customer know their appointment is locked in.
+    8. **Upsell**: After confirming the booking, call `offer_upsell` with the primary service type. Present the offer naturally, then wrap up the call.
 
     Rules:
     - Keep responses concise (2-4 sentences). This is a phone call, not an essay.
