@@ -590,6 +590,116 @@
     opacity: 1;
   }
 
+  /* ===== Tech flow (Slide 3 - What Worked) ===== */
+  .tech-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+  }
+  .tech-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .tech-node.lit { opacity: 1; transform: translateY(0); }
+  .tech-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+  .tech-node.lit .tech-icon {
+    box-shadow: 0 0 20px rgba(255,255,255,0.06);
+  }
+  .tech-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    white-space: nowrap;
+  }
+  .tech-arrow {
+    padding: 0 6px;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-bottom: 20px;
+  }
+  .tech-arrow.lit { opacity: 1; transform: translateX(0); }
+  /* Pulse on active node */
+  .tech-node.active .tech-icon {
+    animation: tech-ping 0.6s ease-out;
+  }
+  @keyframes tech-ping {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+  }
+
+  /* Toolkit chips */
+  .toolkit-chip {
+    display: inline-block;
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* LOC table */
+  .loc-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .loc-table tr td {
+    padding: 6px 0;
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .loc-table tr:last-child td { border-bottom: none; }
+  .loc-table .loc-num {
+    text-align: right;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--blue);
+  }
+  .loc-table .loc-total td {
+    border-top: 1px solid rgba(255,255,255,0.12);
+    border-bottom: none;
+    padding-top: 10px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .loc-table .loc-total .loc-num {
+    color: var(--amber);
+    font-size: 16px;
+  }
+
+  /* Team badge */
+  .team-badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--amber-dim);
+    border: 1px solid rgba(255, 183, 6, 0.3);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 0.5px;
+  }
+
   /* Section label */
   .section-num {
     font-size: 12px;
@@ -618,23 +728,36 @@
     <div class="slide-content">
       <div class="two-col">
         <div>
-          <div class="anim d1">
+          <div class="anim d1" style="margin-bottom: 16px;">
+            <div class="team-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px;vertical-align:middle;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Team Pro CallHouse
+            </div>
+            <p style="font-size: 13px; color: rgba(255,255,255,0.35); margin-top: 6px;">Kelvin Ticona &amp; Vinicius Martinson</p>
+          </div>
+          <div class="anim d2">
             <h1>A<span class="amber">i</span>VA</h1>
             <p class="subtitle">AI for Virtual Assistants</p>
           </div>
-          <div class="anim d2" style="margin-top: 36px;">
+          <div class="anim d3" style="margin-top: 28px;">
             <div class="accent-line"></div>
+            <h3 style="color: rgba(255,255,255,0.5); font-weight: 500; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;">Who Is a VA?</h3>
+            <p style="margin-top: 8px; font-size: 17px; line-height: 1.6;">
+              A <strong style="color:var(--white)">human agent</strong> that takes incoming calls on behalf of Pros during after hours, holidays, or weekends — so Pros can <strong style="color:var(--white)">continue to book jobs</strong> even outside business hours.
+            </p>
+          </div>
+          <div class="anim d4" style="margin-top: 20px;">
             <h3 style="color: rgba(255,255,255,0.5); font-weight: 500; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;">The Problem</h3>
             <p style="margin-top: 10px; font-size: 19px; line-height: 1.7;">
               VAs juggle <strong style="color:var(--white)">scripts</strong>, <strong style="color:var(--white)">tabs</strong>, <strong style="color:var(--white)">multiple flows</strong>, and product types of different organizations — that can introduce errors and upset Pros.
             </p>
           </div>
-          <div class="anim d3" style="margin-top: 24px;">
+          <div class="anim d5" style="margin-top: 24px;">
             <h3 style="color: rgba(255,255,255,0.5); font-weight: 500; font-size: 14px; letter-spacing: 2px; text-transform: uppercase;">Who It's For</h3>
             <p style="margin-top: 10px;">HCP Assist VAs handling inbound service calls.</p>
           </div>
         </div>
-        <div class="anim d4">
+        <div class="anim d6">
           <div class="call-flow" id="callFlow">
             <!-- Step 1: Phone ringing -->
             <div class="call-step" data-step="0">
@@ -756,8 +879,17 @@
               <p style="font-size: 15px; margin-bottom: 14px;">Claude Sonnet 4 runs an <strong style="color: var(--white);">8-tool agentic loop</strong> that handles the full call flow:</p>
             </div>
           </div>
+          <div class="anim d5" style="margin-top: 20px;">
+            <div class="card" style="border-color: rgba(255,255,255,0.08); padding: 18px 22px;">
+              <h3 style="font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px;">Also in Our Toolkit</h3>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <span class="toolkit-chip"><strong style="color:var(--amber)">GSD</strong> Claude plugin</span>
+                <span class="toolkit-chip"><strong style="color:#A78BFA">Pencil.dev</strong> Figma alternative</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="anim d5">
+        <div class="anim d6">
           <div class="tool-loop-circle" id="toolLoop">
             <div class="orbit-ring"></div>
             <div class="orbit-tracer"></div>
@@ -816,10 +948,10 @@
           <div class="anim d4">
             <div class="card amber-glow" style="margin-bottom: 20px;">
               <h3>
-                <svg class="inline-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                Widget Pattern
+                <svg class="inline-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFB706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                .md Files as Context
               </h3>
-              <p style="font-size: 16px;">Tool results → <strong style="color:var(--white)">typed discriminated union</strong> → interactive React components. AI designed this end-to-end.</p>
+              <p style="font-size: 16px;">Leveraged <strong style="color:var(--white)">.md files across development</strong> so each new Claude session picks up context right away — no ramp-up time.</p>
             </div>
           </div>
           <div class="anim d5">
@@ -830,6 +962,53 @@
               </h3>
               <p style="font-size: 16px;">AI helped craft the strict step-by-step flow with <strong style="color:var(--white)">WAIT / IMMEDIATELY</strong> semantics.</p>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tech flow animation -->
+      <div class="anim d6" style="margin-top: 28px;">
+        <div class="tech-flow" id="techFlow">
+          <div class="tech-node" data-tidx="0">
+            <div class="tech-icon" style="border-color: rgba(59,130,246,0.25); box-shadow: 0 0 16px rgba(59,130,246,0.08);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <span class="tech-label">Frontend</span>
+          </div>
+          <div class="tech-arrow" data-tidx="0">
+            <svg width="32" height="14" viewBox="0 0 32 14"><path d="M0 7 L22 7" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="3 3"/><polygon points="22 3, 32 7, 22 11" fill="rgba(255,255,255,0.2)"/></svg>
+          </div>
+          <div class="tech-node" data-tidx="1">
+            <div class="tech-icon" style="border-color: rgba(16,185,129,0.25); box-shadow: 0 0 16px rgba(16,185,129,0.08);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+            </div>
+            <span class="tech-label">Web API Voice</span>
+          </div>
+          <div class="tech-arrow" data-tidx="1">
+            <svg width="32" height="14" viewBox="0 0 32 14"><path d="M0 7 L22 7" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="3 3"/><polygon points="22 3, 32 7, 22 11" fill="rgba(255,255,255,0.2)"/></svg>
+          </div>
+          <div class="tech-node" data-tidx="2">
+            <div class="tech-icon" style="border-color: rgba(255,183,6,0.25); box-shadow: 0 0 16px rgba(255,183,6,0.08);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFB706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <span class="tech-label">Rails / Whisper</span>
+          </div>
+          <div class="tech-arrow" data-tidx="2">
+            <svg width="32" height="14" viewBox="0 0 32 14"><path d="M0 7 L22 7" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="3 3"/><polygon points="22 3, 32 7, 22 11" fill="rgba(255,255,255,0.2)"/></svg>
+          </div>
+          <div class="tech-node" data-tidx="3">
+            <div class="tech-icon" style="border-color: rgba(167,139,250,0.3); box-shadow: 0 0 16px rgba(167,139,250,0.1);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A78BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m-7-7h6m6 0h6"/></svg>
+            </div>
+            <span class="tech-label">Claude Agent</span>
+          </div>
+          <div class="tech-arrow tech-arrow-return" data-tidx="3">
+            <svg width="32" height="14" viewBox="0 0 32 14"><path d="M0 7 L22 7" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="3 3"/><polygon points="22 3, 32 7, 22 11" fill="rgba(255,255,255,0.2)"/></svg>
+          </div>
+          <div class="tech-node" data-tidx="4">
+            <div class="tech-icon" style="border-color: rgba(59,130,246,0.25); box-shadow: 0 0 16px rgba(59,130,246,0.08);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 10 20 15 15 20"/><path d="M4 4v7a4 4 0 0 0 4 4h12"/></svg>
+            </div>
+            <span class="tech-label">Response</span>
           </div>
         </div>
       </div>
@@ -904,18 +1083,34 @@
             <li class="anim d2"><strong>Less GSD, more doing</strong> — the plugin is powerful but planning overhead ate into build time. Ship first, polish later.</li>
             <li class="anim d3"><strong>Give EVEN MORE context to the backend POC</strong> — we thought in human terms, not in AI terms. The AI needs explicit, structured context to perform.</li>
             <li class="anim d4"><strong>Start with the system prompt FIRST</strong> — it's the product spec. Everything else flows from it.</li>
-            <li class="anim d5"><strong>Keep AI context small and focused</strong> — one feature at a time beats "build everything."</li>
+            <li class="anim d5"><strong>Keep AI context small and focused</strong> — leverage <strong>/clear</strong> and <strong>/compact</strong> commands to reset context between features.</li>
           </ul>
         </div>
-        <div class="anim d6">
-          <div class="card amber-glow" style="text-align: center; padding: 36px 28px;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FFB706" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 12 18.469c-.874 0-1.712.327-2.348.913l-.14.141a5 5 0 0 1-.548-.547z"/></svg>
-            <h3 style="font-size: 18px; margin-bottom: 12px; color: var(--amber);">Key Takeaway</h3>
-            <p style="font-size: 17px; line-height: 1.7;">
-              <strong style="color: var(--white);">AI-first approach + enough context</strong> = can build anything you'd like.
-            </p>
-            <p style="font-size: 28px; font-weight: 800; color: var(--white); margin-top: 20px; letter-spacing: -0.5px;">99.9%</p>
-            <p style="font-size: 14px; color: rgba(255,255,255,0.5); margin-top: 6px;">We did <strong style="color: var(--white);">NOT</strong> write a single line of logic code.</p>
+        <div>
+          <div class="anim d6">
+            <div class="card amber-glow" style="text-align: center; padding: 28px 24px;">
+              <h3 style="font-size: 16px; margin-bottom: 10px; color: var(--amber);">Key Takeaway</h3>
+              <p style="font-size: 16px; line-height: 1.6;">
+                <strong style="color: var(--white);">AI-first approach + enough context</strong> = can build anything you'd like.
+              </p>
+              <p style="font-size: 26px; font-weight: 800; color: var(--white); margin-top: 14px; letter-spacing: -0.5px;">99.9%</p>
+              <p style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 4px;">We did <strong style="color: var(--white);">NOT</strong> write a single line of logic code.</p>
+            </div>
+          </div>
+          <div class="anim d7" style="margin-top: 16px;">
+            <div class="card" style="padding: 18px 22px; border-color: rgba(255,255,255,0.08);">
+              <h3 style="font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 12px;">
+                <svg class="inline-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px;"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                Lines of Code
+              </h3>
+              <table class="loc-table">
+                <tr><td>Frontend</td><td class="loc-num">3,329</td></tr>
+                <tr><td>Backend</td><td class="loc-num">1,203</td></tr>
+                <tr><td>Audio POC</td><td class="loc-num">696</td></tr>
+                <tr><td>Whisper Service</td><td class="loc-num">179</td></tr>
+                <tr class="loc-total"><td>Total</td><td class="loc-num">5,407</td></tr>
+              </table>
+            </div>
           </div>
         </div>
       </div>
@@ -1013,6 +1208,37 @@
     }
   });
 
+  // === Tech flow animation (Slide 3 - What Worked) ===
+  let techFlowPlayed = false;
+  function playTechFlow() {
+    if (techFlowPlayed) return;
+    techFlowPlayed = true;
+    const flow = document.getElementById('techFlow');
+    const nodes = flow.querySelectorAll('.tech-node');
+    const arrows = flow.querySelectorAll('.tech-arrow');
+    const sequence = [];
+    nodes.forEach((n, i) => {
+      sequence.push(n);
+      if (arrows[i]) sequence.push(arrows[i]);
+    });
+    sequence.forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.add('lit');
+        if (el.classList.contains('tech-node')) {
+          el.classList.add('active');
+          setTimeout(() => el.classList.remove('active'), 600);
+        }
+      }, 800 + i * 300);
+    });
+  }
+  function resetTechFlow() {
+    techFlowPlayed = false;
+    const flow = document.getElementById('techFlow');
+    flow.querySelectorAll('.tech-node, .tech-arrow').forEach(el => {
+      el.classList.remove('lit', 'active');
+    });
+  }
+
   // === Call flow sequential animation (Slide 1) ===
   let callFlowPlayed = false;
   function playCallFlow() {
@@ -1068,8 +1294,11 @@
       resetCallFlow();
       resetProfitGraph();
       setTimeout(playCallFlow, 200);
-      // Graph starts after call flow finishes (~7 items * 400ms + buffer)
       setTimeout(playProfitGraph, 3600);
+    }
+    if (n === 2) {
+      resetTechFlow();
+      setTimeout(playTechFlow, 400);
     }
   };
   // Play on initial load
