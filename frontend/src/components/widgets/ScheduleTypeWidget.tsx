@@ -44,7 +44,7 @@ export function ScheduleTypeWidget({ messageId, options, locked }: ScheduleTypeW
               className={cn(
                 "relative flex flex-1 flex-col items-center gap-2 rounded-lg border-2 p-3 transition-all",
                 isSelected
-                  ? "border-blue-600 bg-blue-50"
+                  ? "border-purple-500 bg-purple-50"
                   : "border-gray-200 hover:bg-gray-50",
                 locked && "pointer-events-none cursor-not-allowed opacity-60"
               )}
@@ -54,7 +54,7 @@ export function ScheduleTypeWidget({ messageId, options, locked }: ScheduleTypeW
               <span className="text-sm font-medium text-gray-900">{option.label}</span>
 
               {isSelected && (
-                <div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600">
+                <div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-purple-500">
                   <Check className="h-3 w-3 text-white" />
                 </div>
               )}

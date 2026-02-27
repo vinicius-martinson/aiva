@@ -1,9 +1,5 @@
 import {
-  
   Sparkles,
-  Briefcase,
-  Calendar,
-  Users,
   LayoutDashboard,
   HelpCircle
 } from "lucide-react"

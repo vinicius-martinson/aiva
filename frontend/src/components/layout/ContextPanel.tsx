@@ -7,6 +7,8 @@ import { LiveBadge } from "@/components/context/LiveBadge"
 import { ClientCard } from "@/components/context/ClientCard"
 import { CallDetails } from "@/components/context/CallDetails"
 import { UnknownCallerCard } from "@/components/context/UnknownCallerCard"
+import { PastJobs } from "@/components/context/PastJobs"
+import { AiTips } from "@/components/context/AiTips"
 
 function SkeletonLoader() {
   return (
@@ -72,7 +74,15 @@ export function ContextPanel() {
               </div>
             )}
 
-            {/* NOTE: Previous Jobs section intentionally omitted - deferred per user decision (CTX-04) */}
+            {/* Previous Jobs */}
+            <div className="px-4 py-4 border-t">
+              <PastJobs />
+            </div>
+
+            {/* AI Tips - appears after 1 min */}
+            <div className="px-4 py-4 border-t">
+              <AiTips />
+            </div>
           </>
         )}
       </div>

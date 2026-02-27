@@ -37,7 +37,7 @@ export function QuickActions() {
             variant="outline"
             size="sm"
             onClick={() => handleAction(action.label)}
-            className="flex items-center gap-1.5 text-xs h-8 rounded-full border-gray-300 hover:border-blue-500 hover:text-blue-600 transition-colors"
+            className="flex items-center gap-1.5 text-xs h-8 rounded-full border-gray-300 hover:border-purple-500 hover:text-purple-500 transition-colors"
           >
             <Icon className="h-3.5 w-3.5" />
             {action.label}

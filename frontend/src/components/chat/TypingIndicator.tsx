@@ -5,7 +5,7 @@ export function TypingIndicator() {
   return (
     <div className="flex gap-3 items-start max-w-[80%]">
       <Avatar className="h-8 w-8 shrink-0">
-        <AvatarFallback className="bg-blue-500 text-white">
+        <AvatarFallback className="bg-purple-500 text-white">
           <Sparkles className="h-4 w-4" />
         </AvatarFallback>
       </Avatar>

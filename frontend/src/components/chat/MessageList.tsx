@@ -30,7 +30,7 @@ export function MessageList() {
         {state.isAgentStreaming && state.streamingText && (
           <div className="flex gap-3 items-start max-w-[80%]">
             <Avatar className="h-8 w-8 shrink-0">
-              <AvatarFallback className="bg-blue-500 text-white">
+              <AvatarFallback className="bg-purple-500 text-white">
                 <Sparkles className="h-4 w-4" />
               </AvatarFallback>
             </Avatar>
@@ -45,8 +45,8 @@ export function MessageList() {
         {state.isAgentStreaming && !state.streamingText && <TypingIndicator />}
         {state.interimTranscript && (
           <div className="flex justify-end">
-            <div className="bg-blue-100 border border-blue-200 rounded-2xl rounded-tr-none px-4 py-3 max-w-[80%]">
-              <p className="text-sm italic text-blue-400 leading-relaxed">{state.interimTranscript}</p>
+            <div className="bg-purple-100 border border-purple-200 rounded-2xl rounded-tr-none px-4 py-3 max-w-[80%]">
+              <p className="text-sm italic text-purple-400 leading-relaxed">{state.interimTranscript}</p>
             </div>
           </div>
         )}

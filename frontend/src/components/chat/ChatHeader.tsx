@@ -14,7 +14,7 @@ export function ChatHeader() {
   return (
     <header className="flex items-center justify-between px-6 py-4 border-b bg-background">
       <div className="flex items-center gap-3">
-        <Sparkles className="h-5 w-5 text-blue-600" />
+        <Sparkles className="h-5 w-5 text-purple-500" />
         <h2 className="font-semibold text-base">Your Agent Script</h2>
       </div>
       <div className="flex items-center gap-3">
