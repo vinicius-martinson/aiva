@@ -1,3 +1,4 @@
+import { useState } from "react"
 import {
   Phone,
   CalendarCheck,
@@ -5,8 +6,10 @@ import {
   SmilePlus,
   TrendingUp,
   TrendingDown,
+  Sparkles,
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { AiInsightBubble } from "@/components/ui/AiInsightBubble"
 import { cn } from "@/lib/utils"
 import {
   kpis,
@@ -151,30 +154,70 @@ function AgentPerformance() {
 }
 
 export function DashboardPage() {
+  const [showInsights, setShowInsights] = useState(false)
+
   return (
     <div className="flex-1 overflow-y-auto p-6 space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-sm text-muted-foreground mt-1">
-          Real-time overview of your AI phone agent
-        </p>
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">Dashboard</h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Real-time overview of your AI phone agent
+          </p>
+        </div>
+        <button
+          onClick={() => setShowInsights((prev) => !prev)}
+          className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
+            showInsights
+              ? "bg-purple-100 text-purple-700 ring-1 ring-purple-300"
+              : "bg-white text-gray-700 ring-1 ring-gray-200 hover:ring-purple-300 hover:text-purple-700"
+          )}
+        >
+          <Sparkles className="h-4 w-4" />
+          AI Tips
+        </button>
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {kpis.map((kpi, i) => (
-          <KPICard key={kpi.label} kpi={kpi} icon={kpiIcons[i]} />
-        ))}
-      </div>
+      <AiInsightBubble
+        message="Bookings are up 8% today — your AI agent is converting more calls into scheduled jobs. Peak booking hour was 2pm."
+        show={showInsights}
+        delayMs={0}
+      >
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {kpis.map((kpi, i) => (
+            <KPICard key={kpi.label} kpi={kpi} icon={kpiIcons[i]} />
+          ))}
+        </div>
+      </AiInsightBubble>
 
       {/* Calls by Hour */}
-      <CallsChart />
+      <AiInsightBubble
+        message="Call volume peaked at 2pm with 25 calls. Consider adding coverage between 1–3pm to reduce wait times."
+        show={showInsights}
+        delayMs={200}
+      >
+        <CallsChart />
+      </AiInsightBubble>
 
       {/* Recent Calls Table */}
-      <RecentCallsTable />
+      <AiInsightBubble
+        message="2 of 6 recent calls resulted in missed or cancelled outcomes. Follow up with James Wilson — his HVAC maintenance call was missed."
+        show={showInsights}
+        delayMs={400}
+      >
+        <RecentCallsTable />
+      </AiInsightBubble>
 
       {/* Agent Performance */}
-      <AgentPerformance />
+      <AiInsightBubble
+        message="First Call Resolution is at 87%, above the 80% target. Booking conversion at 26% has room to improve — the industry average is 32%."
+        show={showInsights}
+        delayMs={600}
+      >
+        <AgentPerformance />
+      </AiInsightBubble>
     </div>
   )
 }
