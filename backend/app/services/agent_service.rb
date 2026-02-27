@@ -44,7 +44,6 @@ class AgentService
   def chat(text)
     puts "[AGENT] User: #{text}"
     @messages << { role: "user", content: text }
-    broadcast({ type: "agent_thinking", timestamp: Time.current.iso8601 })
 
     iterations = 0
 
@@ -55,6 +54,7 @@ class AgentService
         break
       end
 
+      broadcast({ type: "agent_thinking", timestamp: Time.current.iso8601 })
       @seq = 0
       stream = call_claude_stream
       assistant_content = []

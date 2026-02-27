@@ -1,8 +1,9 @@
-import type { ChatMessage, TextMessage, ScheduleTypeMessage, BookingSummaryMessage } from "@/types/chat"
+import type { ChatMessage, TextMessage, ScheduleTypeMessage, BookingSummaryMessage, UpsellMessage } from "@/types/chat"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Sparkles } from "lucide-react"
 import { ScheduleTypeWidget } from "@/components/widgets/ScheduleTypeWidget"
 import { BookingSummaryWidget } from "@/components/widgets/BookingSummaryWidget"
+import { UpsellWidget } from "@/components/widgets/UpsellWidget"
 
 function formatTime(date: Date): string {
   return date.toLocaleTimeString("en-US", {
@@ -104,6 +105,18 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
             messageId={bookMsg.id}
             data={bookMsg.data}
             locked={bookMsg.data.locked}
+          />
+        </AIWidgetBubble>
+      )
+    }
+    case "widget:upsell": {
+      const upsellMsg = message as UpsellMessage
+      return (
+        <AIWidgetBubble message={message}>
+          <UpsellWidget
+            messageId={upsellMsg.id}
+            data={upsellMsg.data}
+            locked={upsellMsg.data.locked}
           />
         </AIWidgetBubble>
       )

@@ -148,6 +148,30 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
             }
           })
         }
+
+        if (tc.tool_name === "offer_upsell") {
+          const result = tc.result as {
+            upsell_id?: string
+            offer_title?: string
+            price_formatted?: string
+            description?: string
+          }
+          if (result.offer_title) {
+            newMessages.push({
+              id: crypto.randomUUID(),
+              role: "assistant",
+              type: "widget:upsell",
+              content: "We have a special offer for you!",
+              timestamp: new Date(),
+              data: {
+                upsell_id: result.upsell_id ?? "",
+                offer_title: result.offer_title,
+                price_formatted: result.price_formatted ?? "",
+                description: result.description ?? "",
+              }
+            })
+          }
+        }
       }
 
       return { ...state, toolResults: newToolResults, messages: newMessages }
@@ -169,6 +193,9 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
             return { ...msg, data: { ...msg.data, locked: true } } as typeof msg
           }
           if (msg.type === "widget:booking_summary") {
+            return { ...msg, data: { ...msg.data, locked: true } } as typeof msg
+          }
+          if (msg.type === "widget:upsell") {
             return { ...msg, data: { ...msg.data, locked: true } } as typeof msg
           }
         }

@@ -36,6 +36,21 @@ export type BookingSummaryMessage = {
   }
 }
 
+export type UpsellMessage = {
+  id: string
+  role: "assistant"
+  type: "widget:upsell"
+  content: string
+  timestamp: Date
+  data: {
+    upsell_id: string
+    offer_title: string
+    price_formatted: string
+    description: string
+    locked?: boolean
+  }
+}
+
 export type ToolCallResult = {
   tool_name: string
   tool_use_id: string
@@ -44,4 +59,4 @@ export type ToolCallResult = {
 }
 
 // Discriminated union — switch on message.type for type-safe rendering
-export type ChatMessage = TextMessage | ScheduleTypeMessage | BookingSummaryMessage
+export type ChatMessage = TextMessage | ScheduleTypeMessage | BookingSummaryMessage | UpsellMessage

@@ -90,3 +90,12 @@
   display: inline-block;
   animation: typing-bounce 1.2s infinite;
 }
+
+/* Upsell widget glow animation */
+@keyframes upsell-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(245, 158, 11, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.5); }
+}
+.upsell-glow {
+  animation: upsell-glow 2s ease-in-out infinite;
+}
