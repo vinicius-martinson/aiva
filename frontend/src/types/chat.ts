@@ -22,6 +22,19 @@ export type ClassifyVisitMessage = {
   }
 }
 
+export type ValidateAddressMessage = {
+  id: string
+  role: "assistant"
+  type: "widget:validate_address"
+  content: string
+  timestamp: Date
+  data: {
+    formatted_address: string
+    in_service_area: boolean
+    coordinates: { lat: number; lng: number }
+  }
+}
+
 // Phase 2+ widget types — defined now for forward compatibility
 export type ScheduleTypeMessage = {
   id: string
@@ -73,4 +86,4 @@ export type ToolCallResult = {
 }
 
 // Discriminated union — switch on message.type for type-safe rendering
-export type ChatMessage = TextMessage | ClassifyVisitMessage | ScheduleTypeMessage | BookingSummaryMessage | UpsellMessage
+export type ChatMessage = TextMessage | ClassifyVisitMessage | ValidateAddressMessage | ScheduleTypeMessage | BookingSummaryMessage | UpsellMessage

@@ -1,7 +1,8 @@
-import type { ChatMessage, TextMessage, ClassifyVisitMessage, ScheduleTypeMessage, BookingSummaryMessage, UpsellMessage } from "@/types/chat"
+import type { ChatMessage, TextMessage, ClassifyVisitMessage, ValidateAddressMessage, ScheduleTypeMessage, BookingSummaryMessage, UpsellMessage } from "@/types/chat"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Sparkles } from "lucide-react"
 import { ClassifyVisitWidget } from "@/components/widgets/ClassifyVisitWidget"
+import { ValidateAddressWidget } from "@/components/widgets/ValidateAddressWidget"
 import { ScheduleTypeWidget } from "@/components/widgets/ScheduleTypeWidget"
 import { BookingSummaryWidget } from "@/components/widgets/BookingSummaryWidget"
 import { UpsellWidget } from "@/components/widgets/UpsellWidget"
@@ -95,6 +96,18 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
             issueSummary={classifyMsg.data.issue_summary}
             urgency={classifyMsg.data.urgency}
             reason={classifyMsg.data.reason}
+          />
+        </AIWidgetBubble>
+      )
+    }
+    case "widget:validate_address": {
+      const addrMsg = message as ValidateAddressMessage
+      return (
+        <AIWidgetBubble message={message}>
+          <ValidateAddressWidget
+            formattedAddress={addrMsg.data.formatted_address}
+            inServiceArea={addrMsg.data.in_service_area}
+            coordinates={addrMsg.data.coordinates}
           />
         </AIWidgetBubble>
       )

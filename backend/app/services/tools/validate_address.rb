@@ -23,7 +23,7 @@ module Tools
         formatted_address: address,
         in_service_area: true,
         map_embed_url: "https://www.google.com/maps/search/?api=1&query=#{encoded}",
-        coordinates: { lat: 30.2672, lng: -97.7431 }
+        coordinates: { lat: 40.7128, lng: -74.0060 }
       }
     end
   end

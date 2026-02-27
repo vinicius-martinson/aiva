@@ -130,6 +130,28 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
           }
         }
 
+        if (tc.tool_name === "validate_address") {
+          const result = tc.result as {
+            formatted_address?: string
+            in_service_area?: boolean
+            coordinates?: { lat: number; lng: number }
+          }
+          if (result.formatted_address) {
+            newMessages.push({
+              id: crypto.randomUUID(),
+              role: "assistant",
+              type: "widget:validate_address",
+              content: "Address validated",
+              timestamp: new Date(),
+              data: {
+                formatted_address: result.formatted_address ?? "",
+                in_service_area: result.in_service_area ?? false,
+                coordinates: result.coordinates ?? { lat: 40.7128, lng: -74.0060 }
+              }
+            })
+          }
+        }
+
         if (tc.tool_name === "fetch_service_pricing") {
           const pricingResult = tc.result as {
             service_type?: string
