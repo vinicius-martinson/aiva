@@ -195,6 +195,32 @@ function chatReducer(state: ChatState, action: ChatAction): ChatState {
           })
         }
 
+        if (tc.tool_name === "analyze_call") {
+          const result = tc.result as {
+            overall_score?: number
+            summary?: string
+            strengths?: string[]
+            improvements?: string[]
+            next_steps?: string[]
+          }
+          if (result.overall_score !== undefined) {
+            newMessages.push({
+              id: crypto.randomUUID(),
+              role: "assistant",
+              type: "widget:call_analysis",
+              content: "Call performance analysis",
+              timestamp: new Date(),
+              data: {
+                overall_score: result.overall_score ?? 0,
+                summary: result.summary ?? "",
+                strengths: result.strengths ?? [],
+                improvements: result.improvements ?? [],
+                next_steps: result.next_steps ?? []
+              }
+            })
+          }
+        }
+
         if (tc.tool_name === "offer_upsell") {
           const result = tc.result as {
             upsell_id?: string

@@ -8,7 +8,8 @@ class AgentService
     "validate_address"       => Tools::ValidateAddress,
     "fetch_service_pricing"  => Tools::FetchServicePricing,
     "confirm_booking"        => Tools::ConfirmBooking,
-    "offer_upsell"           => Tools::OfferUpsell
+    "offer_upsell"           => Tools::OfferUpsell,
+    "analyze_call"           => Tools::AnalyzeCall
   }.freeze
 
   TOOLS = TOOL_MODULES.values.map { |mod| mod::SCHEMA }.freeze
@@ -22,7 +23,7 @@ class AgentService
     3. **Collect customer info**: After the customer selects a schedule type, ask for their full name and address. WAIT for their response. Do NOT call any tools yet.
     4. **Process customer info**: Once the customer provides their name and address, call `collect_customer_info`. Then IMMEDIATELY call `validate_address`. Then IMMEDIATELY call `fetch_service_pricing` with the appropriate service type. After all three tools complete, present the pricing, duration, and available time slots to the customer. WAIT for their selection.
     5. **Confirm and upsell**: Once the customer selects a time slot, call `confirm_booking` with the service details. Then IMMEDIATELY call `offer_upsell` with the primary service type. After both tools complete, confirm the booking to the customer and naturally present the upsell offer. WAIT for their response.
-    6. **Wrap up**: After the customer responds to the upsell, acknowledge their choice and wrap up the call warmly.
+    6. **Wrap up and analyze**: After the customer responds to the upsell, acknowledge their choice and wrap up the call warmly. Then IMMEDIATELY call `analyze_call` with a brief summary of the call and the service type.
 
     Rules:
     - Keep responses concise (2-4 sentences). This is a phone call, not an essay.

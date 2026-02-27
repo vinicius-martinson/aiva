@@ -78,6 +78,21 @@ export type UpsellMessage = {
   }
 }
 
+export type CallAnalysisMessage = {
+  id: string
+  role: "assistant"
+  type: "widget:call_analysis"
+  content: string
+  timestamp: Date
+  data: {
+    overall_score: number
+    summary: string
+    strengths: string[]
+    improvements: string[]
+    next_steps: string[]
+  }
+}
+
 export type ToolCallResult = {
   tool_name: string
   tool_use_id: string
@@ -86,4 +101,4 @@ export type ToolCallResult = {
 }
 
 // Discriminated union — switch on message.type for type-safe rendering
-export type ChatMessage = TextMessage | ClassifyVisitMessage | ValidateAddressMessage | ScheduleTypeMessage | BookingSummaryMessage | UpsellMessage
+export type ChatMessage = TextMessage | ClassifyVisitMessage | ValidateAddressMessage | ScheduleTypeMessage | BookingSummaryMessage | UpsellMessage | CallAnalysisMessage

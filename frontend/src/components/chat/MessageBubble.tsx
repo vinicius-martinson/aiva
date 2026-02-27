@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import type { ChatMessage, TextMessage, ClassifyVisitMessage, ValidateAddressMessage, ScheduleTypeMessage, BookingSummaryMessage, UpsellMessage } from "@/types/chat"
+import type { ChatMessage, TextMessage, ClassifyVisitMessage, ValidateAddressMessage, ScheduleTypeMessage, BookingSummaryMessage, UpsellMessage, CallAnalysisMessage } from "@/types/chat"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Sparkles } from "lucide-react"
 import { ClassifyVisitWidget } from "@/components/widgets/ClassifyVisitWidget"
@@ -7,6 +7,7 @@ import { ValidateAddressWidget } from "@/components/widgets/ValidateAddressWidge
 import { ScheduleTypeWidget } from "@/components/widgets/ScheduleTypeWidget"
 import { BookingSummaryWidget } from "@/components/widgets/BookingSummaryWidget"
 import { UpsellWidget } from "@/components/widgets/UpsellWidget"
+import { CallAnalysisWidget } from "@/components/widgets/CallAnalysisWidget"
 
 const typedMessages = new Set<string>()
 
@@ -185,6 +186,14 @@ export function MessageBubble({ message }: { message: ChatMessage }) {
             data={upsellMsg.data}
             locked={upsellMsg.data.locked}
           />
+        </AIWidgetBubble>
+      )
+    }
+    case "widget:call_analysis": {
+      const analysisMsg = message as CallAnalysisMessage
+      return (
+        <AIWidgetBubble message={message}>
+          <CallAnalysisWidget data={analysisMsg.data} />
         </AIWidgetBubble>
       )
     }
